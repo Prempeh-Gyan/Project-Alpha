@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="author" content="ISAG-Ghana">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage"
+	content="../../viewResources/images/logo.png">
+<meta name="theme-color" content="#ffffff">
+
+<title>ISAG-Committee</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link
+	th:href="@{../../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../../viewResources/images/HomePage/Favicons/manifest.json}">
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- Banner Adverts -->
+				<div th:include="fragments/adverts-inner-inner :: banner-adverts"></div>
+				<!-- Banner Adverts -->
+				<div class="clearfix"></div>
+
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="panel panel-default">
+									<div class="alert alert-warning has-feedback" role="alert"
+										style="margin: 0%;">
+										<h2>
+											<strong th:text="${committee.name}"></strong>
+										</h2>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<div class="item">
+												<div th:if="not ${committeePhotos.isEmpty()}"
+													id="myCarousel" class="carousel slide" data-ride="carousel"
+													style="height: 340px;">
+													<!-- Wrapper for slides -->
+													<div class="carousel-inner" role="listbox">
+														<div th:each="photo , iterStat : ${committeePhotos}"
+															class="item "
+															th:classappend="(${iterStat.first ? 'active' : ''})">
+															<img
+																th:src="@{../../getPicture/{photoId}(photoId=${photo.photo.id})}"
+																alt="..." class="img-responsive"
+																style="margin: 0 auto; max-height: 340px;">
+														</div>
+													</div>
+
+													<!-- Left and right controls -->
+													<a class="left carousel-control" href="#myCarousel"
+														role="button" data-slide="prev"> <span
+														class="glyphicon glyphicon-chevron-left"
+														aria-hidden="true"></span> <span class="sr-only">Previous</span>
+													</a> <a class="right carousel-control" href="#myCarousel"
+														role="button" data-slide="next"> <span
+														class="glyphicon glyphicon-chevron-right"
+														aria-hidden="true"></span> <span class="sr-only">Next</span>
+													</a> <br />
+												</div>
+												<br />
+
+												<div class="media-body">
+													<pre
+														style="white-space: pre-wrap; text-align: justify; font-size: medium; color: rgb(41, 53, 86); overflow: auto; font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif; background-color: white; border: none;"
+														th:utext="${committee.description}"></pre>
+												</div>
+												<br />
+												<div th:if="not ${committeeVideos.isEmpty()}"
+													id="myCarousel2" class="carousel slide"
+													data-interval="false" style="height: 340px;">
+													<!-- Wrapper for slides -->
+													<div class="carousel-inner" role="listbox">
+														<div th:each="video , iterStat : ${committeeVideos}"
+															class="item "
+															th:classappend="(${iterStat.first ? 'active' : ''})"
+															style="text-align: center">
+															<video width="600" controls>
+																<source style="margin: 0 auto;"
+																	th:src="@{../../getVideo/{videoId}(videoId=${video.video.id})}"
+																	media="all">
+																<p>Your browser does not support this video's
+																	format!.</p>
+															</video>
+														</div>
+													</div>
+
+													<!-- Left and right controls -->
+													<a class="left carousel-control" href="#myCarousel2"
+														role="button" data-slide="prev"
+														style="width: 5%; background-color: black;"> <span
+														class="glyphicon glyphicon-chevron-left"
+														aria-hidden="true"></span> <span class="sr-only">Previous</span>
+													</a> <a class="right carousel-control" href="#myCarousel2"
+														role="button" data-slide="next"
+														style="width: 5%; background-color: black;"> <span
+														class="glyphicon glyphicon-chevron-right"
+														aria-hidden="true"></span> <span class="sr-only">Next</span>
+													</a><br />
+												</div>
+												<br /> <br />
+												<div th:if="${positionAndHolder}"
+													class="col-xs-12 profile_details">
+													<div class="col-md-4 col-sm-4 col-xs-12 profile_details"
+														style="width: 100%;">
+														<div class="well profile_view" style="width: 100%;">
+															<div class="col-sm-12" style="text-align: justify; font-size: medium; color: rgb(41, 53, 86);">
+																<div class="left col-xs-7">
+																	<h4>
+																		<strong
+																			th:text="${#strings.toUpperCase(positionAndHolder.positionHolder.profile.firstName + ' ' + positionAndHolder.positionHolder.profile.lastName)}"></strong>
+																	</h4>
+																	<h5>
+																		<strong
+																			th:text="${#strings.capitalizeWords(#strings.toLowerCase(positionAndHolder.position.name))}"></strong>
+																		<br /> <strong> <small><time
+																					class="timeago"
+																					th:datetime="${positionAndHolder.startDate}">July
+																					17, 2017</time></small></strong>
+																	</h5>
+																</div>
+																<div class="right col-xs-5 text-center">
+																	<img
+																		th:src="(${positionAndHolder.positionHolder.profile.photo} == null ? @{../../viewResources/images/anonnymous1.png} : @{../../getPicture/{photoId}(photoId=${positionAndHolder.positionHolder.profile.photo.id})})"
+																		alt="" class="img-circle img-responsive"
+																		style="border-radius: 10%">
+																</div>
+															</div>
+														</div>
+														<div class="form-bottom contact-form">
+															<form class="form-horizontal form-label-left input_mask">
+																<div class="form-group has-feedback">
+																	<input type="text"
+																		class="form-control has-feedback-left"
+																		id="sendersName" placeholder="Your Name..."
+																		name="sendersName" required="required"> <span
+																		class="fa fa-user form-control-feedback left"
+																		aria-hidden="true" style="border: none;"></span>
+																</div>
+																<div class="form-group has-feedback">
+																	<input type="email"
+																		class="form-control has-feedback-left"
+																		id="sendersEmail" placeholder="Email..."
+																		name="sendersEmail"> <span
+																		class="fa fa-at form-control-feedback left"
+																		aria-hidden="true" style="border: none;"></span>
+																</div>
+																<div class="form-group has-feedback">
+																	<input type="text"
+																		class="form-control has-feedback-left"
+																		id="sendersPhoneNumber" placeholder="Phone Number..."
+																		name="sendersPhoneNumber"> <span
+																		class="fa fa-phone form-control-feedback left"
+																		aria-hidden="true" style="border: none;"></span>
+																</div>
+																<div class="form-group has-feedback">
+																	<input type="text"
+																		class="form-control has-feedback-left" id="subject"
+																		name="subject" placeholder="Subject..."
+																		required="required"> <span
+																		class="fa fa-envelope form-control-feedback left"
+																		aria-hidden="true" style="border: none;"></span>
+																</div>
+																<input type="text" hidden="hidden" id="recipientsId"
+																	name="recipientsId"
+																	th:value="${positionAndHolder.positionHolder.id}">
+																<div class="form-group">
+																	<textarea rows="4" cols=""
+																		placeholder="Your message here..."
+																		class="form-control" id="message" name="message"></textarea>
+																</div>
+																<div class="form-group">
+																	<div style="margin: 0 auto; width: 70%;">
+																		<button type="reset" class="btn btn-primary">Cancel</button>
+																		<button type="button" class="btn btn-success"
+																			onclick="sendMessage();">Send Message</button>
+																	</div>
+																</div>
+															</form>
+															<div id="messageStatus"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /.panel-body -->
+									</div>
+									<br /> <br />
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>Our Partners And Sponsors</strong><span
+												class="fa fa-certificate feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a th:href="@{../contact-us}" class="list-group-item"> <img
+											th:src="@{../../viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<!-- TimeAgo -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/build/js/jquery.timeago.js}"
+		type="text/javascript"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("time.timeago").timeago();
+		});
+	</script>
+	<script type="text/javascript">
+		function sendMessage() {
+			$("#messageStatus").empty();
+			$("#messageStatus")
+					.append(
+							'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Sending message...</a></strong></h2></div></div>');
+
+			$
+					.getJSON(
+							"../sendMessageFromPublic",
+							{
+								recipientsId : $('#recipientsId').val(),
+								sendersName : $('#sendersName').val(),
+								sendersEmail : $('#sendersEmail').val(),
+								sendersPhoneNumber : $('#sendersPhoneNumber')
+										.val(),
+								subject : $('#subject').val(),
+								message : $('#message').val()
+							},
+							function(data) {
+								$("#messageStatus").empty();
+								if (data == "success") {
+									$("#messageStatus")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Message sent!</a></strong></h2></div></div>');
+									$("#sendersName").val("");
+									$("#sendersEmail").val("");
+									$("#sendersPhoneNumber").val("");
+									$("#message").val("");
+									$("#subject").val("");
+
+									$("#sendersName").attr("text", "");
+									$("#sendersEmail").attr("text", "");
+									$("#sendersPhoneNumber").attr("text", "");
+									$("#message").attr("text", "");
+									$("#subject").attr("text", "");
+
+								} else {
+									$("#messageStatus")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Error! Invalid input</a></strong></h2></div></div>');
+								}
+							})
+					.fail(
+							function(jqxhr, textStatus, error) {
+								$("#messageStatus").empty();
+								$("#messageStatus")
+										.append(
+												'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Something went wrong! please try again after a few minutes</a></strong></h2></div></div>');
+							});
+		}
+	</script>
+</body>
+</html>

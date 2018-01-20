@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="description"
+	content="ISAG&#8217s mission is to provide a support system, social network and advocacy platform for foreign spouses of Ghanaians">
+<meta name="keywords"
+	content="About,About ISAG,About Us,Ghana,Immigration,Marriage,Inheritance,Dual-Nationality,Dual-Citizenship,Residents Permit,Intestate Law,Foreign Spouses,Expats">
+<meta name="author" content="ISAG-Ghana">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage"
+	content="../viewResources/images/logo.png">
+<meta name="theme-color" content="#ffffff">
+<!-- Facebook meta data -->
+<meta property="fb:app_id" content="1871408619767453" />
+<meta property="fb:admins" content="xxx" />
+<meta property="og:url"
+	content="http://isag-ghana.org/alpha/public/about-us" />
+<meta property="og:title" content="ISAG-About Us" />
+<meta property="og:description"
+	content="ISAG&#8217s mission is to provide a support system, social network and advocacy platform for foreign spouses of Ghanaians" />
+<meta property="og:image"
+	content="../viewResources/images/AboutUs/Milestones_Graphic-672x372.png" />
+
+<title>ISAG-About Us</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link th:href="@{../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../viewResources/images/HomePage/Favicons/manifest.json}">
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- Banner Adverts -->
+				<div th:include="fragments/adverts-inner :: banner-adverts"></div>
+				<!-- Banner Adverts -->
+				<div class="clearfix"></div>
+
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="panel panel-default">
+									<div class="x_panel" style="border: none;">
+										<div class="x_content">
+											<div class="" role="tabpanel"
+												data-example-id="togglable-tabs"
+												style="text-align: justify; font-size: medium; color: rgb(41, 53, 86);">
+												<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+													<li role="presentation" class="active"><a
+														href="#tab_content1" id="aboutUs" role="tab"
+														data-toggle="tab" aria-expanded="true">About Us</a></li>
+													<li role="presentation" class=""><a
+														href="#tab_content2" role="tab" id="mission"
+														data-toggle="tab" aria-expanded="false">Mission</a></li>
+													<li role="presentation" class=""><a
+														href="#tab_content3" role="tab" id="milestone"
+														data-toggle="tab" aria-expanded="false">Milestones</a></li>
+													<li role="presentation" class=""><a
+														href="#tab_content4" role="tab" id="board"
+														data-toggle="tab" aria-expanded="false">Executives</a></li>
+													<li role="presentation" class=""><a
+														href="#tab_content5" role="tab" id="committees"
+														data-toggle="tab" aria-expanded="false">Committee
+															Leaders</a></li>
+												</ul>
+												<div id="myTabContent" class="tab-content">
+													<div role="tabpanel" class="tab-pane fade active in"
+														id="tab_content1" aria-labelledby="aboutUs">
+														<br /> <br />
+														<div id="myCarousel" class="carousel slide"
+															data-ride="carousel">
+															<!-- Wrapper for slides -->
+															<div class="carousel-inner" role="listbox">
+																<div class="item active">
+																	<img
+																		th:src="@{../viewResources/images/AboutUs/aboutUs.png}"
+																		alt="Flower">
+																</div>
+															</div>
+														</div>
+														<br /> <br /> <strong><h3>ABOUT US</h3></strong>
+														<p>
+															The year is 1994 . It is the United Nation&#8217s
+															International Year of the Family, Nelson Mandela is
+															elected President of South Africa, and FIFA establishes
+															the Golden Goal rule. Meanwhile in Ghana, some people
+															meet to form the foundation of an association to support
+															foreign spouses and their Ghanaian families. <br> <br>
+															Though the countries they were born in might differ, what
+															they have in common is that they are married to Ghanaians
+															and have decided to make Ghana their home. <br> <br>
+															Their vision is that foreign spouses needs a support
+															system, an association in which the diversity of its
+															members can be celebrated and the members&#8217
+															commitment to Ghana can be promoted. The International
+															Spouses&#8217 Association of Ghana is born. <br> <br>
+															Ghana is our home!
+														</p>
+													</div>
+													<div role="tabpanel" class="tab-pane fade"
+														id="tab_content2" aria-labelledby="mission">
+														<br /> <br />
+														<div id="myCarousel" class="carousel slide"
+															data-ride="carousel">
+															<!-- Wrapper for slides -->
+															<div class="carousel-inner" role="listbox">
+																<div class="item active">
+																	<img
+																		th:src="@{../viewResources/images/AboutUs/Mission-672x372.jpg}"
+																		alt="Flower">
+																</div>
+															</div>
+														</div>
+														<br /> <strong><h3>OUR MISSION</h3></strong>
+														<p>ISAG&#8217s mission is to provide a support system,
+															social network and advocacy platform for foreign spouses
+															of Ghanaians so that they can maintain their commitment
+															to Ghana. ISAG enhances its members&#8217 ability to
+															sustain their partnership with their spouses, fulfill
+															their custodianship of their children, and participate
+															fully in the social, cultural and economic life in Ghana.</p>
+														<br> <strong><h3>OUR COMMITMENT</h3></strong>
+														<p>
+															Our Commitment As foreign spouses of Ghanaians, we
+															advocate and promote the full legal rights of our members
+															to live and work as Ghanaian spouses do. We are members
+															of Ghanaian families and therefore uphold the importance
+															of the family in the full development of the individual
+															and the nation. <br> <br> As parents of
+															Ghanaian children, we assist our members in their special
+															responsibility of nurturing citizens of dual heritage. We
+															offer the additional support that a member&#8217s family
+															would normally provide as we are individuals away from
+															their native homes. <br> <br> As men and women
+															of different cultures and traditions, we foster mutual
+															respect, understanding and friendship between our
+															members&#8217 own and our adopted Ghanaian culture. <br>
+															<br> As responsible members of the community, we
+															align ourselves with local and international groups who
+															aspire to attain greater human dignity and gender equity
+															and work for its expression in everyday life.
+														</p>
+													</div>
+													<div role="tabpanel" class="tab-pane fade"
+														id="tab_content3" aria-labelledby="milestone">
+														<br /> <br />
+														<div id="myCarousel" class="carousel slide"
+															data-ride="carousel">
+															<!-- Wrapper for slides -->
+															<div class="carousel-inner" role="listbox">
+																<div class="item active">
+																	<img
+																		th:src="@{../viewResources/images/AboutUs/Milestones_Graphic-672x372.png}"
+																		alt="Flower">
+																</div>
+															</div>
+														</div>
+														<br /> <br /> <strong><h3>MILESTONES &
+																ACHIEVEMENTS</h3></strong>
+														<p>
+															Our two major advocacy success happened in 2000 and 2013.
+															In 2000, we achieved the adaptation by the government of
+															the Indefinite Residence Permit for foreign spouses. <br>
+															<br> In 2013, we achieved the exemption from the
+															foreign investment criteria requirements in the GIPC
+															legislation which makes it much more feasible for
+															Ghanaian spouses to establish a business in Ghana. <br>
+															<br> We also realized a gender neutral construction
+															of the immigration law that made foreign male
+															spouses&#8217 entitlements equal to that of the foreign
+															female spouse. This change in the Constitution gives
+															foreign male spouse the right to citizenship, which was
+															previously limited to foreign female spouses. <br> <br>
+															Finally, we were able to convince the legislators that
+															the definition of spouse should include foreigners who
+															had been married to Ghanaians. Hence the inclusion of “is
+															or has been” in certain legislation, e.g. a foreign
+															spouse who is or has been married to a Ghanaian.
+														</p>
+													</div>
+													<div role="tabpanel" class="tab-pane fade"
+														id="tab_content4" aria-labelledby="board">
+														<br /> <br />
+														<table class="table table-striped projects">
+															<tbody>
+																<tr>
+																	<td>
+																		<div th:each="row : ${executives}"
+																			th:if="(${row.isHeadPosition})"
+																			class="
+																			col-md-4 col-sm-4 col-xs-12
+																			profile_details"
+																			style="width: 100%;">
+																			<div class="well profile_view" style="width: 100%;">
+																				<div class="col-sm-12">
+																					<div class="left col-xs-7">
+																						<h4>
+																							<strong
+																								th:text="${#strings.toUpperCase(row.positionHolder.profile.firstName + ' ' + row.positionHolder.profile.lastName)}"></strong>
+																						</h4>
+																						<h5>
+																							<strong
+																								th:text="${#strings.capitalizeWords(#strings.toLowerCase(row.position.name))}"></strong>
+																							<br /> <strong> <small><time
+																										class="timeago" th:datetime="${row.startDate}">July
+																										17, 2017</time></small></strong>
+																						</h5>
+																					</div>
+																					<div class="right col-xs-5 text-center">
+																						<img
+																							th:src="(${row.positionHolder.profile.photo} == null ? @{../viewResources/images/anonnymous1.png} : @{../getPicture/{photoId}(photoId=${row.positionHolder.profile.photo.id})})"
+																							alt="" class="img-circle img-responsive"
+																							style="border-radius: 10%">
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div th:each="row : ${executives}"
+																			th:if="(${row.isHeadPosition == false && row.position.id != 4})"
+																			class="col-md-4 col-sm-4 col-xs-12 profile_details"
+																			style="width: 100%;">
+																			<div class="well profile_view" style="width: 100%;">
+																				<div class="col-sm-12">
+																					<div class="left col-xs-7">
+																						<h4>
+																							<strong
+																								th:text="${#strings.toUpperCase(row.positionHolder.profile.firstName + ' ' + row.positionHolder.profile.lastName)}"></strong>
+																						</h4>
+																						<h5>
+																							<strong
+																								th:text="${#strings.capitalizeWords(#strings.toLowerCase(row.position.name))}"></strong>
+																							<br /> <strong> <small><time
+																										class="timeago" th:datetime="${row.startDate}">July
+																										17, 2017</time></small></strong>
+																						</h5>
+																					</div>
+																					<div class="right col-xs-5 text-center">
+																						<img
+																							th:src="(${row.positionHolder.profile.photo} == null ? @{../viewResources/images/anonnymous1.png} : @{../getPicture/{photoId}(photoId=${row.positionHolder.profile.photo.id})})"
+																							alt="" class="img-circle img-responsive"
+																							style="border-radius: 10%">
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div role="tabpanel" class="tab-pane fade"
+														id="tab_content5" aria-labelledby="committees">
+														<br /> <br />
+														<table class="table table-striped projects">
+															<tbody>
+																<tr>
+																	<td>
+																		<div th:each="row : ${committeeLeaders}"
+																			class="
+																			col-md-4 col-sm-4 col-xs-12
+																			profile_details"
+																			style="width: 100%;">
+																			<div class="well profile_view" style="width: 100%;">
+																				<div class="col-sm-12">
+																					<div class="left col-xs-7">
+																						<h4>
+																							<strong
+																								th:text="${#strings.toUpperCase(row.positionHolder.profile.firstName + ' ' + row.positionHolder.profile.lastName)}"></strong>
+																						</h4>
+																						<h5>
+																							<strong
+																								th:text="${#strings.capitalizeWords(#strings.toLowerCase(row.position.name))}"></strong>
+																							<br /> <strong> <small><time
+																										class="timeago" th:datetime="${row.startDate}">July
+																										17, 2017</time></small></strong>
+																						</h5>
+																					</div>
+																					<div class="right col-xs-5 text-center">
+																						<img
+																							th:src="(${row.positionHolder.profile.photo} == null ? @{../viewResources/images/anonnymous1.png} : @{../getPicture/{photoId}(photoId=${row.positionHolder.profile.photo.id})})"
+																							alt="" class="img-circle img-responsive"
+																							style="border-radius: 10%">
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>What We Do...</strong><span
+												class="fa fa-first-order feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<div class="panel-body">
+										<div class="x_content"></div>
+										<ul class="list-unstyled timeline widget">
+											<li>
+												<div class="block">
+													<div class="block_content">
+														<h2 class="title">
+															<strong><a>AS FOREIGN SPOUSES</a></strong>
+														</h2>
+														<a class="excerpt" style="text-align: justify;">We
+															advocate and promote the full legal rights of our members
+															to live and work as Ghanaian spouses do. We are members
+															of Ghanaian families and therefore uphold the importance
+															of the family in the full development of the individual
+															and the nation.</a>
+													</div>
+												</div>
+												<div class="block">
+													<div class="block_content">
+														<h2 class="title">
+															<strong><a>AS PARENTS OF GHANAIAN CHILDREN</a></strong>
+														</h2>
+														<a class="excerpt" style="text-align: justify;">We
+															assist our members in their special responsibility of
+															nurturing citizens of dual heritage. We offer the
+															additional support that a member&#8217s family would
+															normally provide as we are individuals away from their
+															native homes.</a>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>Our Partners And Sponsors</strong><span
+												class="fa fa-certificate feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a th:href="@{contact-us}" class="list-group-item"> <img
+											th:src="@{../viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<!-- TimeAgo -->
+	<script
+		th:src="@{../viewResources/bootstrap3/build/js/jquery.timeago.js}"
+		type="text/javascript"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("time.timeago").timeago();
+		});
+	</script>
+
+</body>
+</html>

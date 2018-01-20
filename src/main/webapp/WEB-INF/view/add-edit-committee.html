@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="author" content="ISAG-Ghana">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage"
+	content="../viewResources/images/logo.png">
+<meta name="theme-color" content="#ffffff">
+
+<title>ISAG-Update Committees</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link th:href="@{../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../viewResources/images/HomePage/Favicons/manifest.json}">
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="panel panel-default">
+									<div sec:authorize="hasRole('ROLE_EXECUTIVE_COUNCIL')">
+										<div class="alert alert-warning" role="alert"
+											style="margin: 0%;">
+											<h2>
+												<strong>Modify Existing Committee Details</strong>
+											</h2>
+										</div>
+										<div class="panel-body">
+											<div class="x_content">
+												<br />
+												<form class="form-horizontal form-label-left input_mask"
+													th:action="@{../admin/edit-existing-committee}"
+													th:object="${editCommitteeFormDTO}"
+													enctype="multipart/form-data" method="POST">
+													<div th:if="${#fields.hasErrors('*')}"
+														class="alert alert-danger alert-dismissible fade in"
+														id="formsDiv">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+														<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+													</div>
+													<div th:if="${addedSuccessfully}"
+														class="alert alert-success alert-dismissible fade in"
+														id="formsDiv">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+														<p th:text="${addedSuccessfully}"
+															style="text-align: center; font-size: medium;"></p>
+													</div>
+													<div th:if="${duplicate}"
+														class="alert alert-danger alert-dismissible fade in"
+														id="formsDiv">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+														<p th:text="${duplicate}"
+															style="text-align: center; font-size: medium;"></p>
+													</div>
+													<div class="col-xs-12 form-group has-feedback">
+														<select class="form-control has-feedback-left"
+															name="committeeId" id="committeeId"
+															onchange="getCommitteeDetails()">
+															<option value="-1">Select Committee</option>
+															<option th:each="committee : ${currentCommitees}"
+																th:value="${committee.id}" th:text="${committee.name}"></option>
+														</select> <span class="fa fa-user form-control-feedback left"
+															aria-hidden="true"></span>
+													</div>
+													<div
+														class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+														th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+														<label>Change Committee Name</label> <input type="text"
+															class="form-control has-feedback-left" id="committeeName"
+															contenteditable="true" th:field="*{name}"
+															placeholder="Committee Name..." name="title"
+															required="required"> <span
+															class="fa fa-user form-control-feedback left"
+															aria-hidden="true"></span>
+													</div>
+													<div class="col-md-12 form-group"
+														th:classappend="${#fields.hasErrors('description')}? 'has-error'">
+														<label>Update Committee Description</label>
+														<textarea contenteditable="true" rows="10"
+															class="form-control" id="descriptionText"
+															name="description" th:field="*{description}">
+													</textarea>
+													</div>
+													<div
+														class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+														<label>Change Committee Cover Picture</label> <input
+															type="file" class="form-control" id="coverPicture"
+															name="coverPicture"> <span
+															class="fa fa-camera form-control-feedback right"
+															aria-hidden="true"></span>
+													</div>
+													<div class="form-group">
+														<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+															<button type="button" class="btn btn-primary">Cancel</button>
+															<button class="btn btn-primary" type="reset">Reset</button>
+															<button type="submit" class="btn btn-success">Submit</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<div class="alert alert-warning" role="alert"
+										style="margin: 0%;">
+										<h2>
+											<strong>Add Committee Documents</strong>
+										</h2>
+									</div>
+									<div class="panel-body">
+										<div class="x_content">
+											<br />
+											<form class="form-horizontal form-label-left input_mask"
+												th:action="@{../admin/add-committee-documents}"
+												enctype="multipart/form-data" method="POST">
+												<div th:if="${addedSuccessfully}"
+													class="alert alert-success alert-dismissible fade in"
+													id="formsDiv">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+													<p th:text="${addedSuccessfully}"
+														style="text-align: center; font-size: medium;"></p>
+												</div>
+												<div th:if="${duplicate2}"
+													class="alert alert-danger alert-dismissible fade in"
+													id="formsDiv">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+													<p th:text="${duplicate2}"
+														style="text-align: center; font-size: medium;"></p>
+												</div>
+												<div class="col-xs-12 form-group has-feedback">
+													<select class="form-control has-feedback-left"
+														name="committeeId" id="committeeId"
+														onchange="getCommitteeDetails()">
+														<option value="-1">Select Committee</option>
+														<option th:each="committee : ${currentCommitees}"
+															th:value="${committee.id}" th:text="${committee.name}"></option>
+													</select> <span class="fa fa-user form-control-feedback left"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12	">
+													<div class="alert alert-success alert-dismissible fade in"
+														role="alert">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close"></button>
+														<h2 style="text-align: center;">
+															<strong>Pictures</strong>
+														</h2>
+													</div>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="pictures"
+														name="pictures"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12	">
+													<div class="alert alert-success alert-dismissible fade in"
+														role="alert">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close"></button>
+														<h2 style="text-align: center;">
+															<strong>Videos</strong>
+														</h2>
+													</div>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="videos"
+														name="videos"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="videos"
+														name="videos"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="videos"
+														name="videos"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="videos"
+														name="videos"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12	">
+													<div class="alert alert-success alert-dismissible fade in"
+														role="alert">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close"></button>
+														<h2 style="text-align: center;">
+															<strong>Reports</strong>
+														</h2>
+													</div>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="reports"
+														name="reports"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="reports"
+														name="reports"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="reports"
+														name="reports"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="reports"
+														name="reports"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12	">
+													<div class="alert alert-success alert-dismissible fade in"
+														role="alert">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close"></button>
+														<h2 style="text-align: center;">
+															<strong>Minutes</strong>
+														</h2>
+													</div>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="minutes"
+														name="minutes"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="minutes"
+														name="minutes"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="minutes"
+														name="minutes"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="minutes"
+														name="minutes"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12	">
+													<div class="alert alert-warning alert-dismissible fade in"
+														role="alert">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close"></button>
+														<h2 style="text-align: center;">
+															<strong>Confidential Documents</strong>
+
+														</h2>
+													</div>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="confDocuments"
+														name="confDocuments"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="confDocuments"
+														name="confDocuments"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="confDocuments"
+														name="confDocuments"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="confDocuments"
+														name="confDocuments"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12	">
+													<div class="alert alert-success alert-dismissible fade in"
+														role="alert">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close"></button>
+														<h2 style="text-align: center;">
+															<strong>Other Documents</strong>
+
+														</h2>
+													</div>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="documents"
+														name="documents"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="documents"
+														name="documents"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="documents"
+														name="documents"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="documents"
+														name="documents"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="form-group">
+													<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+														<button type="button" class="btn btn-primary">Cancel</button>
+														<button class="btn btn-primary" type="reset">Reset</button>
+														<button type="submit" class="btn btn-success">Submit</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-8 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<script>
+		$(document).ready(function() {
+			// Handler for .ready() called.
+			$('html, body').animate({
+				scrollTop : $('#formsDiv').offset().top
+			}, 'slow');
+		});
+	</script>
+
+	<script type="text/javascript">
+		function getCommitteeDetails() {
+
+			$("#committeeName").empty();
+			$("#descriptionText").empty();
+
+			$
+					.getJSON("../admin/getCommitteeDescription", {
+						committeeId : $('#committeeId').val()
+					}, function(data) {
+						if (data != null && data.length > 0) {
+							$("#committeeName").val(data[0]);
+							$("#descriptionText").text(data[1]);
+						}
+					})
+					.fail(
+							function(jqxhr, textStatus, error) {
+								$("#descriptionText")
+										.text(
+												'An error occured whiles fetching the description for this committee, please try again');
+							});
+
+		}
+	</script>
+
+</body>
+</html>
+
+
+
+

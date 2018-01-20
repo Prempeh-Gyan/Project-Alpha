@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Registration Error</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- Custom Theme Style -->
+<link th:href="@{viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<!-- page content -->
+			<div class="col-md-12">
+				<div class="col-middle">
+					<div class="text-center text-center">
+						<h1 class="alert alert-danger" th:text="${param.message[0]}">error</h1>
+						<div class="mid_center">
+							<div th:if="${param.expired[0]}">
+								<br />
+								<h1 th:text="#{label.form.resendRegistrationToken}"></h1>
+								<button onclick="resendToken()">Get Token</button>
+								<!-- jQuery -->
+								<script
+									th:src="@{viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+								<script th:inline="javascript">
+/*<![CDATA[*/
+var serverContext = [[@{/}]];
+
+function resendToken(){
+	var token = [[${param.token}]];
+    $.get(serverContext + "user/resendRegistrationToken?token="+token, function(data){
+        window.location.href = serverContext +"login?message=" + data.message;
+    })
+    .fail(function(data) {
+        if(data.responseJSON.error.indexOf("MailError") > -1)
+        {
+            window.location.href = serverContext + "emailError.html";
+        }
+        else{
+            window.location.href = serverContext + "login?message=" + data.responseJSON.message;
+        }
+    });
+}
+
+$(document).ajaxStart(function() {
+    $("title").html("LOADING ...");
+});
+/*]]>*/
+</script>
+
+							</div>
+							<div class="separator" style="color: white;">
+								<p class="change_link">
+									New to ISAG? <a th:href="@{/public/joinus}" class="to_register"
+										style="color: white;"> Create Account</a>
+								</p>
+								<p class="change_link" style="color: white;">
+									<a th:href="@{/}" style="color: white;">Return To Home Page</a>
+								</p>
+
+								<div class="clearfix"></div>
+								<br />
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+		</div>
+	</div>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{viewResources/bootstrap3/build/js/custom.min.js}"></script>
+</body>
+</html>

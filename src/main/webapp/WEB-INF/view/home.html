@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="author" content="ISAG-Ghana">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage"
+	content="../viewResources/images/logo.png">
+<meta name="theme-color" content="#ffffff">
+
+<title>ISAG-Home</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link th:href="@{../viewResources/bootstrap3/build/css/custom.css}"
+	rel="stylesheet">
+
+<style type="text/css">
+.timeline:before {
+	content: " ";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 0px;
+	margin-left: -1.5px;
+	background-color: #eeeeee;
+}
+
+ul.timeline:before {
+	left: 40px;
+}
+</style>
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../viewResources/images/HomePage/Favicons/manifest.json}">
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- Banner Adverts -->
+				<div th:include="fragments/adverts-inner :: banner-adverts"></div>
+				<!-- Banner Adverts -->
+				<div class="clearfix"></div>
+
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="alert alert-warning" role="alert"
+									style="margin: 0%;">
+									<h2>
+										<strong>Welcome To ISAG</strong> | Ghana is our home too!
+									</h2>
+								</div>
+								<div class="panel panel-default panel-body">
+									<div id="myCarousel" class="carousel slide"
+										data-ride="carousel">
+										<!-- Indicators -->
+										<ol class="carousel-indicators">
+											<li data-target="#myCarousel" data-slide-to="0"
+												class="active"></li>
+											<li data-target="#myCarousel" data-slide-to="1"></li>
+											<li data-target="#myCarousel" data-slide-to="2"></li>
+											<li data-target="#myCarousel" data-slide-to="3"></li>
+										</ol>
+
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner" role="listbox">
+											<div class="item active">
+												<img
+													th:src="@{../viewResources/images/HomePage/SlideShow/slide1.png}">
+											</div>
+
+											<div class="item">
+												<img
+													th:src="@{../viewResources/images/HomePage/SlideShow/slide2.png}">
+											</div>
+
+											<div class="item">
+												<img
+													th:src="@{../viewResources/images/HomePage/SlideShow/slide3.png}">
+											</div>
+
+											<div class="item">
+												<img
+													th:src="@{../viewResources/images/HomePage/SlideShow/slide4.png}">
+											</div>
+										</div>
+
+										<!-- Left and right controls -->
+										<a class="left carousel-control" href="#myCarousel"
+											role="button" data-slide="prev"> <span
+											class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+											<span class="sr-only">Previous</span>
+										</a> <a class="right carousel-control" href="#myCarousel"
+											role="button" data-slide="next"> <span
+											class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+											<span class="sr-only">Next</span>
+										</a>
+									</div>
+									<div class="panel-body">
+										<ul class="timeline">
+											<li style="border-bottom: none;">
+												<div class="timeline-badge info">
+													<i class="fa fa-users"></i>
+												</div>
+												<div class="timeline-panel"
+													style="width: auto; margin-left: 11%;">
+													<div class="timeline-body">
+														<img
+															th:src="@{../viewResources/images/HomePage/Body/who.png}"
+															class="img-responsive" style="margin: 0 auto;">
+													</div>
+												</div>
+												<div class="panel"
+													style="margin-left: 55%; margin-right: 3%;">
+													<div class="timeline-heading">
+														<h4 class="timeline-title" style="color: rgb(41, 53, 86);">
+															<strong>Who Are We</strong>
+														</h4>
+													</div>
+													<div class="timeline-body">
+														<p
+															style="text-align: justify; font-size: medium; color: rgb(41, 53, 86);">ISAG
+															is a self-help association that was formed in 1994 to
+															assist and support foreign spouses of Ghanaians in their
+															integration into Ghanaian society. Its unique character
+															derives from the diverse cultures of our members, their
+															belief in the value of this diversity, and their
+															commitment to Ghana.</p>
+													</div>
+												</div>
+											</li>
+											<li class="timeline-inverted" style="border-bottom: none;">
+												<div class="timeline-badge warning">
+													<i class="fa fa-heartbeat"></i>
+												</div>
+												<div class="timeline-panel"
+													style="width: auto; margin-right: 11%;">
+													<div class="timeline-body">
+														<img
+															th:src="@{../viewResources/images/HomePage/Body/what.png}"
+															class="img-responsive" style="margin: 0 auto;">
+													</div>
+												</div>
+												<div class="panel"
+													style="margin-right: 55%; margin-left: 3%;">
+													<div class="timeline-heading">
+														<h4 class="timeline-title" style="color: rgb(41, 53, 86);">
+															<strong>What We Do</strong>
+														</h4>
+													</div>
+													<div class="timeline-body" style="border: none;">
+														<p
+															style="text-align: justify; font-size: medium; color: rgb(41, 53, 86);">ISAG
+															acts as a support system for foreign spouses and their
+															Ghanaian partners and families, enhancing its
+															members&#8217 ability to maintain their commitments to
+															Ghana, sustain their partnership with their spouses,
+															fulfill their custodianship of their children, and in
+															other ways to participate fully in the social, cultural
+															and economic life of Ghana.</p>
+													</div>
+												</div>
+											</li>
+											<li style="border-bottom: none;">
+												<div class="timeline-badge success">
+													<i class="fa fa-trophy"></i>
+												</div>
+												<div class="timeline-panel"
+													style="width: auto; margin-left: 11%;">
+													<div class="timeline-body">
+														<img
+															th:src="@{../viewResources/images/HomePage/Body/how.png}"
+															class="img-responsive" style="margin: 0 auto;">
+													</div>
+												</div>
+												<div class="panel"
+													style="margin-left: 55%; margin-right: 3%;">
+													<div class="timeline-heading">
+														<h4 class="timeline-title" style="color: rgb(41, 53, 86);">
+															<strong>Our Milestones</strong>
+														</h4>
+													</div>
+													<div class="timeline-body" style="border: none;">
+														<p
+															style="text-align: justify; font-size: medium; color: rgb(41, 53, 86);">ISAG
+															successfully lobbied to achieve the introduction, by the
+															government, of the Indefinite Residence Permit for
+															foreign spouses. We also achieved an exemption for
+															Ghanaian spouses from the foreign investment criteria
+															requirements in the GIPC legislation, making it feasible
+															for Ghanaian spouses to establish their businesses in
+															Ghana.</p>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>What We Do...</strong><span
+												class="fa fa-first-order feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<div class="panel-body">
+										<div class="x_content"></div>
+										<ul class="list-unstyled timeline widget">
+											<li>
+												<div class="block">
+													<div class="block_content">
+														<h2 class="title">
+															<strong><a>AS FOREIGN SPOUSES</a></strong>
+														</h2>
+														<a class="excerpt" style="text-align: justify;">We
+															advocate and promote the full legal rights of our members
+															to live and work as Ghanaian spouses do. We are members
+															of Ghanaian families and therefore uphold the importance
+															of the family in the full development of the individual
+															and the nation.</a>
+													</div>
+												</div>
+												<div class="block">
+													<div class="block_content">
+														<h2 class="title">
+															<strong><a>AS PARENTS OF GHANAIAN CHILDREN</a></strong>
+														</h2>
+														<a class="excerpt" style="text-align: justify;">We
+															assist our members in their special responsibility of
+															nurturing citizens of dual heritage. We offer the
+															additional support that a member&#8217s family would
+															normally provide as we are individuals away from their
+															native homes.</a>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>Our Partners And Sponsors</strong><span
+												class="fa fa-certificate feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a th:href="@{contact-us}" class="list-group-item"> <img
+											th:src="@{../viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

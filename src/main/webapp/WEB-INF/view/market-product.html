@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>ISAG-Product</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link
+	th:href="@{../../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../../viewResources/images/HomePage/Favicons/manifest.json}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- Banner Adverts -->
+				<div th:include="fragments/adverts-inner-inner :: banner-adverts"></div>
+				<!-- Banner Adverts -->
+				<div class="clearfix"></div>
+
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="alert alert-warning" role="alert"
+									style="margin: 0%;">
+									<h2>
+										<strong>Product Details | </strong> <span
+											style="text-align: center;" th:text="${product.name}"></span>
+									</h2>
+								</div>
+								<!-- /.panel -->
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<a class="list-group-item" data-toggle="modal"
+											data-target=".bs-example-modal-lg"> <img
+											style="margin: 0 auto; max-height: 350px; max-width: 640px;"
+											th:src="@{../../getPicture/{photoId}(photoId=${photos.get(0).id})}">
+										</a>
+										<div class="row" style="margin: 0 auto; width: inherit;">
+											<div class="product_gallery" style="margin: 0 auto;">
+												<a th:each="photo, iterStat : ${photos}" class="thumbnail">
+													<img
+													th:src="@{../../getPicture/{photoId}(photoId=${photo.id})}"
+													alt="..." data-toggle="modal"
+													data-target=".bs-example-modal-lg">
+												</a>
+											</div>
+										</div>
+										<br />
+										<ul style="font-size: medium; color: rgb(41, 53, 86);"
+											class="list-unstyled user_data">
+											<li><i class="fa fa-info-circle"></i><strong>
+													About Product: </strong><span
+												style="text-align: justify; word-break: normal; word-break: break-all;"
+												th:text="${product.shortDescription}"></span></li>
+
+											<li><i class="fa fa-money"></i><strong>
+													Price: </strong><span class="product_price"
+												style="border-color: rgba(189, 49, 49, 1);"> <span><span
+														th:if="${product.currency} == 'EU?'"> <span>EU&#8364</span>
+													</span> <span th:if="${product.currency} != 'EU?'"> <span
+															th:utext="${product.currency}">EU&#8364</span></span> <span
+														th:utext="' ' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span>
+												</span>
+											</span></li>
+											<li><i class="fa fa-map-marker"></i><strong>
+													Location: </strong><span th:text="${product.location}"></span></li>
+										</ul>
+										<form th:if="${currentUser.id == product.owner.id}"
+											th:action="@{../delete-product-from-market}" method="POST">
+											<input hidden="hidden" id="productId" name="productId"
+												th:value="${product.id}">
+											<button class="btn btn-danger" type="submit">Remove
+												From Market</button>
+										</form>
+									</div>
+									<div th:if="${currentUser.id != product.owner.id}">
+										<br />
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3 form-box">
+												<div class="form-top">
+													<div class="form-top-left">
+														<h3 style="text-align: center;">Contact Owner</h3>
+													</div>
+												</div>
+												<div class="form-bottom contact-form">
+													<form class="form-horizontal form-label-left input_mask">
+														<div class="form-group has-feedback">
+															<input type="text" class="form-control has-feedback-left"
+																id="sendersName" placeholder=" Your Name..."
+																name="sendersName" required="required"> <span
+																class="fa fa-user form-control-feedback left"
+																aria-hidden="true" style="border: none;"></span>
+														</div>
+														<div class="form-group has-feedback">
+															<input type="email"
+																class="form-control has-feedback-left" id="sendersEmail"
+																placeholder=" Email..." name="sendersEmail"> <span
+																class="fa fa-at form-control-feedback left"
+																aria-hidden="true" style="border: none;"></span>
+														</div>
+														<div class="form-group has-feedback">
+															<input type="text" class="form-control has-feedback-left"
+																id="sendersPhoneNumber" placeholder=" Phone Number..."
+																name="sendersPhoneNumber"> <span
+																class="fa fa-phone form-control-feedback left"
+																aria-hidden="true" style="border: none;"></span>
+														</div>
+
+														<input type="text" hidden="hidden" id="subject"
+															name="subject"
+															th:value="'Buyer for your ' + ${product.name}"> <input
+															type="text" hidden="hidden" id="recipientsId"
+															name="recipientsId" th:value="${product.owner.id}">
+
+														<div class="form-group">
+															<textarea rows="4" cols=""
+																placeholder="Your message here..." class="form-control"
+																id="message" name="message"></textarea>
+														</div>
+														<div class="form-group">
+															<div style="margin: 0 auto; width: 70%;">
+																<button type="button" class="btn btn-primary">Cancel</button>
+																<button class="btn btn-primary" type="reset">Reset</button>
+																<button type="button" class="btn btn-success"
+																	onclick="sendMessage();">Submit</button>
+															</div>
+														</div>
+													</form>
+													<div id="messageStatus"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- modals -->
+								<!-- Large modal -->
+								<div class="modal fade bs-example-modal-lg" tabindex="-1"
+									role="dialog" aria-hidden="true">
+									<div class="modal-dialog modal-lg" style="width: 70%;">
+										<div class="modal-content">
+											<div class="modal-body">
+												<div class="x_panel">
+													<div class="x_content">
+														<div class="product-image" style="margin: 0 auto;"
+															id="slider">
+															<div id="carousel-bounding-box">
+																<div class="carousel slide" id="myCarousel">
+																	<div class="carousel-inner">
+																		<div class="item"
+																			th:each="photo, iterStat : ${photos}"
+																			th:attr="data-slide-number= ${iterStat.index}"
+																			th:classappend="${iterStat.index == 0}? 'active'">
+																			<img
+																				th:src="@{../../getPicture/{photoId}(photoId=${photo.id})}"
+																				alt="..." class="img-responsive"
+																				style="margin: 0 auto; object-fit: contain; max-height: 400px;">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="product_gallery" style="margin: 0 auto;"
+															id="slider-thumbs">
+															<a class="thumbnail" style="margin: 0 auto;"
+																th:each="photo, iterStat : ${photos}"
+																th:id="'carousel-selector-' + ${iterStat.index}"> <img
+																th:src="@{../../getPicture/{photoId}(photoId=${photo.id})}"
+																alt="..." class="img-responsive" style="margin: 0 auto;">
+															</a>
+														</div>
+														<br />
+														<button style="margin-left: 20%;" type="button"
+															class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>Our Partners And Sponsors</strong><span
+												class="fa fa-certificate feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a th:href="@{../contact-us}" class="list-group-item"> <img
+											th:src="@{../../viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<!-- TimeAgo -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/build/js/jquery.timeago.js}"
+		type="text/javascript"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("time.timeago").timeago();
+		});
+	</script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+
+			$('#myCarousel').carousel({
+				interval : 5000
+			});
+
+			//Handles the carousel thumbnails
+			$('[id^=carousel-selector-]').click(function() {
+				var id_selector = $(this).attr("id");
+				try {
+					var id = /-(\d+)$/.exec(id_selector)[1];
+					console.log(id_selector, id);
+					jQuery('#myCarousel').carousel(parseInt(id));
+				} catch (e) {
+					console.log('Regex failed!', e);
+				}
+			});
+			// When the carousel slides, auto update the text
+			$('#myCarousel').on('slid.bs.carousel', function(e) {
+				var id = $('.item.active').data('slide-number');
+				$('#carousel-text').html($('#slide-content-' + id).html());
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		function sendMessage() {
+			$("#messageStatus").empty();
+			$("#messageStatus")
+					.append(
+							'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Sending message...</a></strong></h2></div></div>');
+
+			$
+					.getJSON(
+							"../../public/sendMessageFromPublic",
+							{
+								recipientsId : $('#recipientsId').val(),
+								sendersName : $('#sendersName').val(),
+								sendersEmail : $('#sendersEmail').val(),
+								sendersPhoneNumber : $('#sendersPhoneNumber')
+										.val(),
+								subject : $('#subject').val(),
+								message : $('#message').val()
+							},
+							function(data) {
+								$("#messageStatus").empty();
+								if (data == "success") {
+									$("#messageStatus")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Message sent!</a></strong></h2></div></div>');
+									$("#sendersName").val("");
+									$("#sendersEmail").val("");
+									$("#sendersPhoneNumber").val("");
+									$("#message").val("");
+
+									$("#sendersName").attr("text", "");
+									$("#sendersEmail").attr("text", "");
+									$("#sendersPhoneNumber").attr("text", "");
+									$("#message").attr("text", "");
+
+								} else {
+									$("#messageStatus")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Error! please input valid values</a></strong></h2></div></div>');
+								}
+							})
+					.fail(
+							function(jqxhr, textStatus, error) {
+								$("#messageStatus").empty();
+								$("#messageStatus")
+										.append(
+												'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Something went wrong! please try again after a few minutes</a></strong></h2></div></div>');
+							});
+		}
+	</script>
+</body>
+</html>

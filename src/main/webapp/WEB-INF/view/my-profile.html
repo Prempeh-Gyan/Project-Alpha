@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>ISAG-Profile</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap-datetimepicker.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link th:href="@{../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../viewResources/images/HomePage/Favicons/manifest.json}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- Banner Adverts -->
+				<div th:include="fragments/adverts-inner :: banner-adverts"></div>
+				<!-- Banner Adverts -->
+				<div class="clearfix"></div>
+
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="panel panel-default">
+									<div id="profileBody" class="alert alert-warning" role="alert"
+										style="margin: 0%;">
+										<h2>
+											<strong>Profile Details</strong>
+										</h2>
+									</div>
+									<div class="panel-body">
+										<div class="x_content">
+											<br />
+											<div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+												<div class="profile_img">
+													<div id="crop-avatar">
+														<!-- Current avatar -->
+														<img class="img-responsive avatar-view"
+															th:src="(${currentUser.profile.photo} == null ? @{../viewResources/images/anonnymous1.png} : @{../getPicture/{photoId}(photoId=${currentUser.profile.photo.id})})"
+															alt="Profile Picture" title="change profile picture"
+															onclick="editProfile();">
+													</div>
+												</div>
+												<br /> <a class="btn btn-success"
+													onclick="manageAccount();"><i
+													class="fa fa-edit m-right-xs"></i>Manage Account</a> <br />
+											</div>
+											<div class="col-md-9 col-sm-9 col-xs-12">
+												<div class="" role="tabpanel"
+													data-example-id="togglable-tabs">
+													<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+														<li role="presentation" class="active"><a
+															href="#tab_content1" id="home-tab" role="tab"
+															data-toggle="tab" aria-expanded="true">About</a></li>
+														<li role="presentation" class=""><a
+															href="#tab_content2" role="tab" id="profile-tab"
+															data-toggle="tab" aria-expanded="false">Recent
+																Activity </a></li>
+														<li role="presentation" class=""><a
+															href="#tab_content3" role="tab" id="profile-tab2"
+															data-toggle="tab" aria-expanded="false">Committees
+																Joined</a></li>
+													</ul>
+													<div id="myTabContent" class="tab-content">
+														<div role="tabpanel" class="tab-pane fade active in"
+															id="tab_content1" aria-labelledby="home-tab">
+															<h3
+																th:text="${currentUser.profile.firstName} + ' ' + ${currentUser.profile.lastName} + ' '"></h3>
+
+															<ul class="list-unstyled user_data">
+																<li><i class="fa fa-info-circle"></i><strong>
+																		About: </strong><span
+																	th:text="'From ' + ${currentUser.profile.nationality + ', Parther from ' +  currentUser.profile.partnersNationality}"></span></li>
+																<li><i class="fa fa-building"></i><strong>
+																		Residence: </strong><span
+																	th:text="'Lives in ' + ${currentUser.profile.city + ', ' + currentUser.profile.countryOfResidence}"></span></li>
+																<li><i class="fa fa-briefcase"></i><strong>
+																		Profession: </strong><span
+																	th:text="${currentUser.profile.profession}"></span></li>
+																<li><i class="fa fa-phone"></i><strong>
+																		Phone: </strong><span
+																	th:text="${currentUser.profile.phoneNumber}"></span></li>
+																<li><i class="fa fa-at"></i><strong>
+																		Email: </strong><span th:text="${currentUser.profile.email}"></span></li>
+															</ul>
+
+														</div>
+														<div role="tabpanel" class="tab-pane fade"
+															id="tab_content2" aria-labelledby="profile-tab">
+															<!-- start recent activity -->
+															<ul class="messages">
+																<li th:each=" recentPosition : ${recentPositions}">
+																	<div class="message_date">
+																		<h3 class="date text-info"
+																			th:text="${#temporals.day(recentPosition.startDate)}"></h3>
+																		<p class="month"
+																			th:text="${#temporals.monthName(recentPosition.startDate)} + ' ' + ${#temporals.year(recentPosition.startDate)}"></p>
+																	</div>
+																	<div class="message_wrapper">
+																		<h4>
+																			<strong th:text="${recentPosition.position.name}"></strong>
+																		</h4>
+																		<p th:text="${recentPosition.position.description}"></p>
+																		<br />
+																	</div>
+																</li>
+																<li
+																	th:each=" committeeAndCommitteeMember : ${recentCommittees}">
+																	<div class="message_date">
+																		<h3 class="date text-info"
+																			th:text="${#temporals.day(committeeAndCommitteeMember.memberSince)}"></h3>
+																		<p class="month"
+																			th:text="${#temporals.monthName(committeeAndCommitteeMember.memberSince)} + ' ' + ${#temporals.year(committeeAndCommitteeMember.memberSince)}"></p>
+																	</div>
+																	<div class="message_wrapper">
+																		<h4>
+																			<strong
+																				th:text="${committeeAndCommitteeMember.committee.name} + ' MEMBER'"></strong>
+																		</h4>
+																		<p
+																			th:text="${committeeAndCommitteeMember.committee.description}"></p>
+																		<br />
+																	</div>
+																</li>
+															</ul>
+															<!-- end recent activity -->
+														</div>
+														<div role="tabpanel" class="tab-pane fade"
+															id="tab_content3" aria-labelledby="profile-tab">
+															<!-- start user projects -->
+															<table class="data table table-striped no-margin">
+																<thead>
+																	<tr>
+																		<th>Committee Name</th>
+																		<th>Description</th>
+																		<th class="hidden-phone">Duration</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr th:each="committeeJoined : ${allCommittees}">
+																		<td th:text="${committeeJoined.committee.name}"></td>
+																		<td th:text="${committeeJoined.committee.description}"></td>
+																		<td class="hidden-phone"
+																			th:text="(${committeeJoined.endDate == null} ? 'Since ' + ${#temporals.monthNameShort(committeeJoined.memberSince)} + ' ' + ${#temporals.format(committeeJoined.memberSince, 'yyyy')} : 'From ' + ${#temporals.monthNameShort(committeeJoined.memberSince)} + ' ' + ${#temporals.format(committeeJoined.memberSince, 'yyyy')} + ' To ' + ${#temporals.monthNameShort(committeeJoined.endDate)} + ' ' + ${#temporals.format(committeeJoined.endDate, 'yyyy')})"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!-- end user projects -->
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div id="manageAccount"
+										th:attr="style = 'display: ' + (${manageAccount} ? ' ' : 'none')">
+										<div class="panel-body">
+											<div class="x_content">
+												<div class="" role="tabpanel"
+													data-example-id="togglable-tabs">
+													<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+														<li role="presentation" class=""
+															th:classappend="${profileTab == null || profileTab == 1 ? 'active' : ''}"><a
+															href="#tab_content_profile" id="profile-tab" role="tab"
+															data-toggle="tab" aria-expanded="true">Edit Profile</a></li>
+														<li role="presentation" class=""
+															th:classappend="${committeeTab != null ? 'active' : ''}"><a
+															href="#tab_content_committee" role="tab"
+															id="committee-tab" data-toggle="tab"
+															aria-expanded="false">Committees</a></li>
+														<li role="presentation" class=""
+															th:classappend="${businessTab != null ? 'active' : ''}"><a
+															href="#tab_content_business" role="tab" id="business-tab"
+															data-toggle="tab" aria-expanded="false">Businesses</a></li>
+														<li role="presentation" class=""
+															th:classappend="${marketTab != null ? 'active' : ''}"><a
+															href="#tab_content_market" role="tab" id="market-tab"
+															data-toggle="tab" aria-expanded="false">Market Items</a></li>
+													</ul>
+													<div id="myTabContent" class="tab-content">
+														<div role="tabpanel" class="tab-pane fade"
+															th:classappend="${profileTab == null || profileTab == 1 ? 'active in' : ''}"
+															id="tab_content_profile" aria-labelledby="profile-tab">
+															<div class="panel-body">
+																<div class="x_content">
+																	<form
+																		class="form-horizontal form-label-left input_mask"
+																		th:action="@{update-profile}" method="POST"
+																		enctype="multipart/form-data">
+																		<div th:if="${profileError}"
+																			class="alert alert-danger alert-dismissible fade in"
+																			id="formsDiv">
+																			<button type="button" class="close"
+																				data-dismiss="alert" aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
+																			<p th:text="${profileError}"
+																				style="text-align: center; font-size: medium;"></p>
+																		</div>
+																		<div th:if="${profileSuccess}"
+																			class="alert alert-success alert-dismissible fade in"
+																			id="formsDiv">
+																			<button type="button" class="close"
+																				data-dismiss="alert" aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
+																			<p th:text="${profileSuccess}"
+																				style="text-align: center; font-size: medium;"></p>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${firtNameError != null ? 'has-error' : ''}">
+																			<input type="text" id="firstName" name="firstName"
+																				class="form-control has-feedback-left"
+																				th:value="${currentUser.profile.firstName}"
+																				contenteditable="true" placeholder="First Name">
+																			<span class="fa fa-user form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${lastNameError != null ? 'has-error' : ''}">
+																			<input type="text" id="lastName" name="lastName"
+																				class="form-control has-feedback-left"
+																				th:value="${currentUser.profile.lastName}"
+																				contenteditable="true" placeholder="Last Name">
+																			<span class="fa fa-user form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${emailError != null ? 'has-error' : ''}">
+																			<input type="email" id="email" name="email"
+																				class="form-control has-feedback-left"
+																				th:value="${currentUser.profile.email}"
+																				contenteditable="true" placeholder="Email">
+																			<span
+																				class="fa fa-envelope form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${phoneNumberError != null ? 'has-error' : ''}">
+																			<input type="text" id="phoneNumber"
+																				name="phoneNumber"
+																				class="form-control has-feedback-left"
+																				th:value="${currentUser.profile.phoneNumber}"
+																				contenteditable="true" placeholder="Phone Number">
+																			<span class="fa fa-phone form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${professionError != null ? 'has-error' : ''}">
+																			<input type="text" id="profession" name="profession"
+																				class="form-control has-feedback-left"
+																				th:value="${currentUser.profile.profession}"
+																				contenteditable="true" placeholder="Profession">
+																			<span
+																				class="fa fa-briefcase form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${dateOfBirthError != null ? 'has-error' : ''}">
+																			<input type="text" id="dateOfBirth"
+																				name="dateOfBirth"
+																				class="form-control has-feedback-left datetimepickertrigger"
+																				th:value="${#temporals.format(currentUser.profile.dateOfBirth, 'MM/dd/yyyy')}"
+																				contenteditable="true" placeholder="Date of Birth"
+																				onclick="triggerCalendar();"> <span
+																				class="fa fa-calendar form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${countryOfResidenceError != null ? 'has-error' : ''}">
+																			<input type="text" id="countryOfResidence"
+																				name="countryOfResidence"
+																				class="form-control has-feedback-left"
+																				th:value="${currentUser.profile.countryOfResidence}"
+																				contenteditable="true"
+																				placeholder="Country of Residence"> <span
+																				class="fa fa-globe form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${cityError != null ? 'has-error' : ''}">
+																			<input type="text" id="city" name="city"
+																				class="form-control has-feedback-left"
+																				th:value="${currentUser.profile.city}"
+																				contenteditable="true" placeholder="City"> <span
+																				class="fa fa-map-marker form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<label>Add / Change Profile Picture...</label><input
+																				type="file" class="form-control" id="profilePicture"
+																				name="profilePicture"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div class="form-group">
+																			<div
+																				class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"
+																				style="margin-left: 15%;">
+																				<a th:href="@{../changePassword}"
+																					class="btn btn-success"> Change Account
+																					Password</a>
+																				<button type="submit" class="btn btn-success">Update
+																					Profile</button>
+																				<button type="button" class="btn btn-warning"
+																					onclick="cancel();">Cancel</button>
+																			</div>
+																		</div>
+																	</form>
+																</div>
+															</div>
+														</div>
+														<div role="tabpanel" class="tab-pane fade"
+															th:classappend="${committeeTab != null ? 'active in' : ''}"
+															id="tab_content_committee"
+															aria-labelledby="committee-tab">
+															<!-- start user projects -->
+															<div th:if="${committeeError}"
+																class="alert alert-danger alert-dismissible fade in"
+																id="formsDiv">
+																<button type="button" class="close" data-dismiss="alert"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+																<p th:text="${committeeError}"
+																	style="text-align: center; font-size: medium;"></p>
+															</div>
+															<div th:if="${committeeSuccess}"
+																class="alert alert-success alert-dismissible fade in"
+																id="formsDiv">
+																<button type="button" class="close" data-dismiss="alert"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+																<p th:text="${committeeSuccess}"
+																	style="text-align: center; font-size: medium;"></p>
+															</div>
+															<table class="data table table-striped no-margin">
+																<thead>
+																	<tr>
+																		<th>ISAG Committees</th>
+																		<th>Description</th>
+																		<th></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr th:each="committee : ${committees}"
+																		th:if="${committee.id >1}">
+																		<td style="width: 30%;" th:text="${committee.name}"></td>
+																		<td style="width: 50%;"
+																			th:text="${committee.description}"></td>
+																		<td style="width: 20%;"><form
+																				th:action="@{update-committee}" method="POST">
+																				<input hidden="hidden" name="committeeId"
+																					id="committeeId" th:value="${committee.id}"><input
+																					hidden="hidden" name="leavingCommitteeId"
+																					id="leavingCommitteeId" value="-1">
+																				<button class="btn btn-success btn-xs" type="submit">Join
+																					Committee</button>
+																			</form></td>
+																	</tr>
+																</tbody>
+															</table>
+															<table class="data table table-striped no-margin">
+																<thead>
+																	<tr>
+																		<th>Your Current Committee(s)</th>
+																		<th class="hidden-phone">Duration</th>
+																		<th></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr th:each="committeeAndMember : ${recentCommittees}">
+																		<td th:text="${committeeAndMember.committee.name}"></td>
+																		<td class="hidden-phone"
+																			th:text="(${committeeAndMember.endDate == null} ? 'Since ' + ${#temporals.monthNameShort(committeeAndMember.memberSince)} + ' ' + ${#temporals.format(committeeAndMember.memberSince, 'yyyy')} : 'From ' + ${#temporals.monthNameShort(committeeAndMember.memberSince)} + ' ' + ${#temporals.format(committeeAndMember.memberSince, 'yyyy')} + ' To ' + ${#temporals.monthNameShort(committeeAndMember.endDate)} + ' ' + ${#temporals.format(committeeAndMember.endDate, 'yyyy')})"></td>
+																		<td><form th:action="@{update-committee}"
+																				method="POST">
+																				<input hidden="hidden" name="leavingCommitteeId"
+																					id="leavingCommitteeId"
+																					th:value="${committeeAndMember.committee.id}"><input
+																					hidden="hidden" name="committeeId" id="committeeId"
+																					value="-1">
+																				<button class="btn btn-danger btn-xs" type="submit">Leave
+																					Committee ?</button>
+																			</form></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														<div role="tabpanel" class="tab-pane fade"
+															th:classappend="${businessTab != null ? 'active in' : ''}"
+															id="tab_content_business" aria-labelledby="business-tab">
+															<div class="panel-body">
+																<div class="x_content">
+																	<div th:if="${business == null}">
+																		<form th:action="@{getBusiness}" method="POST">
+																			<div class="col-md-12 form-group has-feedback">
+																				<select class="form-control has-feedback-left"
+																					id="businessId" name="businessId"
+																					onchange="this.form.submit();">
+																					<option value="-1">Select Business To
+																						Update...</option>
+																					<option th:each="business : ${usersBusinesses}"
+																						th:value="${business.id}"
+																						th:text="${business.companyName}"></option>
+																				</select> <span
+																					class="fa fa-users form-control-feedback left"
+																					aria-hidden="true"></span>
+																			</div>
+																		</form>
+																	</div>
+																	<form th:if="${business == null}"
+																		class="form-horizontal form-label-left input_mask"
+																		th:action="@{add-business}"
+																		th:object="${addBusinessFormDTO}"
+																		enctype="multipart/form-data" method="POST">
+																		<div th:if="${#fields.hasErrors('*')}"
+																			class="alert alert-danger alert-dismissible fade in"
+																			id="formsDiv">
+																			<button type="button" class="close"
+																				data-dismiss="alert" aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
+																			<p th:each="err : ${#fields.errors('*')}"
+																				th:text="${err}"></p>
+																		</div>
+																		<div th:if="${businessError}"
+																			class="alert alert-danger alert-dismissible fade in"
+																			id="formsDiv">
+																			<button type="button" class="close"
+																				data-dismiss="alert" aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
+																			<p th:text="${businessError}"
+																				style="text-align: center; font-size: medium;"></p>
+																		</div>
+																		<div th:if="${businessSuccess}"
+																			class="alert alert-success alert-dismissible fade in"
+																			id="formsDiv">
+																			<button type="button" class="close"
+																				data-dismiss="alert" aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
+																			<p th:text="${businessSuccess}"
+																				style="text-align: center; font-size: medium;"></p>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${#fields.hasErrors('companyName')}? 'has-error'">
+																			<input type="text"
+																				class="form-control has-feedback-left"
+																				id="inputSuccess2"
+																				placeholder="Company/Business Name"
+																				name="companyName" th:field="*{companyName}"
+																				required="required"> <span
+																				class="fa fa-user form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${#fields.hasErrors('date') || #fields.hasErrors('dateFounded')}? 'has-error'">
+																			<input
+																				class="form-control has-feedback-left datetimepicker"
+																				type="text" id="datetimepicker"
+																				placeholder="Date Founded" name="date"
+																				th:field="*{date}"> <span
+																				class="fa fa-calendar form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${#fields.hasErrors('address')}? 'has-error'">
+																			<input type="text"
+																				class="form-control has-feedback-left" id="address"
+																				placeholder="Business Address" name="address"
+																				th:field="*{address}" required="required"> <span
+																				class="fa fa-map-marker form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${#fields.hasErrors('website')}? 'has-error'">
+																			<input type="text"
+																				class="form-control has-feedback-left" id="website"
+																				placeholder="Company / Business Website"
+																				name="website" th:field="*{website}"> <span
+																				class="fa fa-at form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+																			<input type="email"
+																				class="form-control has-feedback-left"
+																				id="inputSuccess4" placeholder="Email" name="email"
+																				th:field="*{email}" required="required"> <span
+																				class="fa fa-at form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${#fields.hasErrors('phoneNumber')}? 'has-error'">
+																			<input type="text"
+																				class="form-control has-feedback-left"
+																				id="inputSuccess5" placeholder="Business Phone"
+																				name="phoneNumber" th:field="*{phoneNumber}">
+																			<span class="fa fa-phone form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div class="col-md-12 form-group"
+																			style="margin-top: 2%;"
+																			th:classappend="${#fields.hasErrors('buisinessDescription')}? 'has-error'">
+																			<textarea rows="7" cols="" class="form-control"
+																				id="inputSuccess2"
+																				placeholder="Company / Business Description Here..."
+																				name="buisinessDescription"
+																				th:field="*{buisinessDescription}"></textarea>
+																		</div>
+																		<div class="col-xs-12 form-group"
+																			style="margin-top: 2%;">
+																			<label>Enter the keywords that describe your
+																				Company / Business using #HashTags</label> <input
+																				type="text" class="form-control" id="businessTypes"
+																				placeholder="Example:   #Hospitality   #Tourism   #Hotels"
+																				name="businessTypes">
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<label> Cover Photo</label> <input type="file"
+																				class="form-control" id="coverPicture"
+																				name="coverPicture"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<label> Promotional Video</label> <input type="file"
+																				class="form-control" id="promotionalVideo"
+																				name="promotionalVideo"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div class="col-md-12	">
+																			<div
+																				class="alert alert-success alert-dismissible fade in"
+																				role="alert">
+																				<button type="button" class="close"
+																					data-dismiss="alert" aria-label="Close"></button>
+																				<h4 style="text-align: center;">
+																					<strong>Additional Company / Business
+																						Photos</strong>
+																				</h4>
+																			</div>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div class="form-group">
+																			<div
+																				class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+																				<button type="submit" class="btn btn-success">Add
+																				</button>
+																				<button type="reset" class="btn btn-warning"
+																					onclick="cancel()">Cancel</button>
+																			</div>
+																		</div>
+																	</form>
+																	<form th:if="${business != null}"
+																		class="form-horizontal form-label-left input_mask"
+																		th:action="@{update-business}"
+																		enctype="multipart/form-data" method="POST">
+																		<div th:if="${businessError}"
+																			class="alert alert-danger alert-dismissible fade in"
+																			id="formsDiv">
+																			<button type="button" class="close"
+																				data-dismiss="alert" aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
+																			<p th:text="${businessError}"
+																				style="text-align: center; font-size: medium;"></p>
+																		</div>
+																		<input id="businessId" name="businessId"
+																			th:value="${business.id}" hidden="hidden">
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${companyNameError != null ? 'has-error' : ''}">
+																			<input type="text" id="companyName"
+																				name="companyName"
+																				class="form-control has-feedback-left"
+																				th:value="${business.companyName}"
+																				contenteditable="true"
+																				placeholder="Company / Business Name"> <span
+																				class="fa fa-user form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${dateError != null ? 'has-error' : ''}">
+																			<input type="text" id="date" name="date"
+																				class="form-control has-feedback-left datetimepickertrigger2"
+																				th:value="${business.dateFounded == null ? '' : business.dateFounded.toString()}"
+																				contenteditable="true" placeholder="Date Founded"
+																				onclick="triggerCalendar2();"> <span
+																				class="fa fa-calendar form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${addressError != null ? 'has-error' : ''}">
+																			<input type="text" id="address" name="address"
+																				class="form-control has-feedback-left"
+																				th:value="${business.address}"
+																				contenteditable="true"
+																				placeholder="Business Address"> <span
+																				class="fa fa-map-marker form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${websiteError != null ? 'has-error' : ''}">
+																			<input type="text" id="website" name="website"
+																				class="form-control has-feedback-left"
+																				th:value="${business.website == null ? '' : business.website}"
+																				contenteditable="true"
+																				placeholder="Company / Business Website"> <span
+																				class="fa fa-at form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${emailError != null ? 'has-error' : ''}">
+																			<input type="text" id="email" name="email"
+																				class="form-control has-feedback-left"
+																				th:value="${business.email == null ? '' : business.email}"
+																				contenteditable="true"
+																				placeholder="Company / Business Email"> <span
+																				class="fa fa-at form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+																			th:classappend="${phoneNumberError != null ? 'has-error' : ''}">
+																			<input type="text" id="phoneNumber"
+																				name="phoneNumber"
+																				class="form-control has-feedback-left"
+																				th:value="${business.phoneNumber}"
+																				contenteditable="true"
+																				placeholder="Company / Business Phone"> <span
+																				class="fa fa-phone form-control-feedback left"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div class="col-md-12 form-group"
+																			style="margin-top: 2%;"
+																			th:classappend="${buisinessDescriptionError != null ? 'has-error' : ''}">
+																			<textarea rows="7" cols="" id="buisinessDescription"
+																				name="buisinessDescription" class="form-control"
+																				th:value="${business.buisinessDescription}"
+																				th:text="${business.buisinessDescription}"
+																				contenteditable="true"
+																				placeholder="Company / Business Description Here..."></textarea>
+																		</div>
+																		<div class="col-xs-12 form-group"
+																			style="margin-top: 2%;"
+																			th:classappend="${businessTypesError != null ? 'has-error' : ''}">
+																			<label>Enter the keywords that describe your
+																				Company / Business using #HashTags</label> <input
+																				type="text" id="businessTypes" name="businessTypes"
+																				class="form-control"
+																				placeholder="Example:   #Hospitality   #Tourism   #Hotels">
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<label> Cover Photo</label> <input type="file"
+																				class="form-control" id="coverPicture"
+																				name="coverPicture"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<label> Promotional Video</label> <input type="file"
+																				class="form-control" id="promotionalVideo"
+																				name="promotionalVideo"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div class="col-md-12	">
+																			<div
+																				class="alert alert-success alert-dismissible fade in"
+																				role="alert">
+																				<button type="button" class="close"
+																					data-dismiss="alert" aria-label="Close"></button>
+																				<h4 style="text-align: center;">
+																					<strong>Additional Company / Business
+																						Photos</strong>
+																				</h4>
+																			</div>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div
+																			class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+																			<input type="file" class="form-control" id="files"
+																				name="files"> <span
+																				class="fa fa-camera form-control-feedback right"
+																				aria-hidden="true"></span>
+																		</div>
+																		<div class="form-group">
+																			<div
+																				class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+																				<button type="submit" class="btn btn-danger"
+																					name="delete" value="delete">Delete</button>
+																				<button type="submit" class="btn btn-success"
+																					name="update" value="update">Update</button>
+																				<button type="submit" class="btn btn-warning"
+																					name="cancel" value="cancel">Cancel</button>
+																			</div>
+																		</div>
+																	</form>
+																</div>
+															</div>
+														</div>
+														<div role="tabpanel" class="tab-pane fade"
+															th:classappend="${marketTab != null ? 'active in' : ''}"
+															id="tab_content_market" aria-labelledby="market-tab">
+															<div th:if="${marketError}"
+																class="alert alert-danger alert-dismissible fade in"
+																id="formsDiv">
+																<button type="button" class="close" data-dismiss="alert"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+																<p th:text="${marketError}"
+																	style="text-align: center; font-size: medium;"></p>
+															</div>
+															<div th:if="${marketSuccess}"
+																class="alert alert-success alert-dismissible fade in"
+																id="formsDiv">
+																<button type="button" class="close" data-dismiss="alert"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+																<p th:text="${marketSuccess}"
+																	style="text-align: center; font-size: medium;"></p>
+															</div>
+															<table
+																class="table table-striped table-hover jambo_table bulk_action">
+																<tbody>
+																	<tr th:if="${page}" th:each="row : ${page}"
+																		class="even pointer clickable-row"
+																		th:attr="data-href=@{../market/market-product/{productId}(productId=${row.id})},alt=#{View Item Details}">
+																		<td style="width: 40%;"><div id="crop-avatar">
+																				<img class="img-responsive avatar-view"
+																					style="margin: 0 auto; max-height: 200px;"
+																					th:src="@{../market/getCoverPicture/{parentId}(parentId=${row.id})}"
+																					alt="Avatar" title="Click to view product">
+																			</div></td>
+																		<td style="width: 50%;"><strong
+																			style="word-break: break-all;"
+																			th:text="${#strings.abbreviate(row.shortDescription,300)}"></strong>
+																			<br /> <span
+																			style="text-align: left; margin-top: 2%; color: rgb(153, 0, 0); font-size: medium;">
+																				<span th:if="${row.currency} == 'EU?'"> <strong>EU&#8364</strong></span>
+																				<span th:if="${row.currency} != 'EU?'"> <strong
+																					th:utext="${row.currency}">EU&#8364</strong></span> <strong
+																				th:utext="' ' + ${#numbers.formatDecimal(row.price, 0, 'COMMA', 2, 'POINT')}"></strong>
+																		</span><br /> <time class="timeago"
+																				th:datetime="${row.date}">July 17, 2017</time><br />
+																			<br />
+																			<button class="btn btn-danger btn-xs" type="submit">Remove
+																				From Market</button></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>Our Partners And Sponsors</strong><span
+												class="fa fa-certificate feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a th:href="@{#}" class="list-group-item"> <img
+											th:src="@{../viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+				</div>
+			</div>
+			<!-- /#page-wrapper -->
+
+		</div>
+		<!-- /#wrapper -->
+	</div>
+	<!-- /page content -->
+
+	<!-- footer content -->
+	<footer>
+		<div class="pull-right">
+			Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+				target="_blank">Prempeh Gyan</a> | &copy; 2017
+		</div>
+		<div class="clearfix"></div>
+	</footer>
+	<!-- /footer content -->
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Moment -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/moment/moment.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap-datetimepicker.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<!-- TimeAgo -->
+	<script
+		th:src="@{../viewResources/bootstrap3/build/js/jquery.timeago.js}"></script>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("time.timeago").timeago();
+		});
+
+		jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
+
+		$(function() {
+			$('.datetimepicker').datetimepicker({
+				format : 'MM/DD/YYYY'
+			});
+		});
+
+		$(document).ready(function() {
+			// Handler for .ready() called.
+			$('html, body').animate({
+				scrollTop : $('#formsDiv, #manageAccount').offset().top
+			}, 'slow');
+		});
+		function manageAccount() {
+			$("#manageAccount").toggle();
+			$('html, body').animate({
+				scrollTop : $('#manageAccount').offset().top
+			}, 'slow');
+		}
+
+		function cancel() {
+			$("#manageAccount").toggle();
+			$('html, body').animate({
+				scrollTop : $('#profileBody').offset().top
+			}, 'slow');
+		}
+
+		var trigger = 1;
+
+		function triggerCalendar() {
+
+			if (trigger === 1) {
+				$('#phoneNumber').focus();
+			}
+
+			$('.datetimepickertrigger').datetimepicker({
+				format : 'MM/DD/YYYY'
+			});
+
+			trigger = trigger + 1;
+
+		}
+
+		var trigger2 = 1;
+
+		function triggerCalendar2() {
+
+			if (trigger2 === 1) {
+				$('#companyName').focus();
+			}
+
+			$('.datetimepickertrigger2').datetimepicker({
+				format : 'MM/DD/YYYY'
+			});
+
+			trigger2 = trigger2 + 1;
+
+		}
+	</script>
+</body>
+</html>

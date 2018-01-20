@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>ISAG-Ghana</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link th:href="@{viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- PNotify -->
+<link
+	th:href="@{viewResources/bootstrap3/vendors/pnotify/dist/pnotify.css}"
+	rel="stylesheet">
+<link
+	th:href="@{viewResources/bootstrap3/vendors/pnotify/dist/pnotify.buttons.css}"
+	rel="stylesheet">
+<link
+	th:href="@{viewResources/bootstrap3/vendors/pnotify/dist/pnotify.nonblock.css}"
+	rel="stylesheet">
+
+<style type="text/css">
+.sidebar-header {
+	top: 0px;
+	clear: both;
+	display: block;
+	padding: 0 0 0 0;
+	position: fixed;
+	width: 230px;
+	height: 40px;
+	z-index: 20;
+	background: #2A3F54;
+}
+
+.sidebar-header a {
+	padding: 7px 0 3px;
+	text-align: center;
+	width: 25%;
+	font-size: 17px;
+	display: block;
+	float: left;
+	background: #172D44;
+}
+
+.sidebar-header a:hover {
+	background: #425567;
+}
+</style>
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{viewResources/images/HomePage/Favicons/manifest.json}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<!-- facebook meta data -->
+<meta property="fb:app_id" content="1871408619767453" />
+<meta property="fb:admins" content="xxx" />
+<meta property="og:url"
+	content="http://isag-ghana.uksouth.cloudapp.azure.com/alpha/index/" />
+<meta property="og:title" content="ISAG-Ghana" />
+<meta property="og:description" content="ISAG-Ghana Homepage" />
+<meta property="og:image" content="IMG" />
+<script async
+	src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+	(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client : "ca-pub-4796405060567257",
+		enable_page_level_ads : true
+	});
+</script>
+</head>
+
+<body class="nav-md" onload="getNewsFeeds();">
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '1871408619767453',
+				xfbml : true,
+				version : 'v2.8'
+			});
+			FB.AppEvents.logPageView();
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- top tiles -->
+				<div class="row top_tiles">
+					<a th:href="@{public/news}">
+						<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="tile-stats">
+								<div class="icon" style="color: rgb(246, 170, 70);">
+									<i class="fa fa-newspaper-o"></i>
+								</div>
+								<div class="count">News</div>
+								<h3>From ISAG...</h3>
+							</div>
+						</div>
+					</a> <a
+						th:href="@{public/event/{eventId}(eventId=${nextEvent == null ? '' : nextEvent.id})}">
+						<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="tile-stats">
+								<div class="icon" style="color: rgb(100, 246, 70);">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<div class="count"
+									th:text="(${nextEvent == null} ? '...' : ${#temporals.monthNameShort(nextEvent.startTime)} + '-' + ${#temporals.day(nextEvent.startTime)})"></div>
+								<h3>Next Event...</h3>
+							</div>
+						</div>
+					</a> <a th:href="@{market/isag-market}">
+						<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="tile-stats">
+								<div class="icon" style="color: rgb(70, 100, 246);">
+									<i class="fa fa-cart-arrow-down"></i>
+								</div>
+								<div class="count" th:text="${products.size()}"></div>
+								<h3
+									th:text="${products.size() == 0 ? 'No Item On Sale...' : products.size() == 1 ? 'Item On Sale...' : 'Items On Sale...' }"></h3>
+							</div>
+						</div>
+					</a> <a th:href="@{public/contact-us}">
+						<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="tile-stats">
+								<div class="icon" style="color: rgb(246, 100, 70);">
+									<i class="fa fa-mobile"></i>
+								</div>
+								<div class="count">Contact</div>
+								<h3>Us Here...</h3>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="x_panel panel panel-default"
+					style="background-color: rgba(2, 2, 2, 0.05);">
+					<div id="isagBanner" class="carousel slide" data-ride="carousel"
+						style="height: inherit;">
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<a class="list-group-item"> <img
+									th:src="@{viewResources/images/banner.jpg}"
+									class="img-responsive" style="margin: 0 auto;">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="alert alert-success has-feedback" role="alert"
+							style="margin: 0%; padding: 0%; padding-left: 15px;">
+							<h2>
+								<strong>Upcoming Events</strong><span
+									class="fa fa-calendar-check-o feedback right"
+									aria-hidden="true"
+									style="font-size: 25px !important; padding-right: 15px;"></span>
+							</h2>
+						</div>
+						<div class="x_panel tile" style="overflow: scroll; height: 400px;">
+							<div class="x_content">
+								<article th:if=" not ${upComingEvents.isEmpty()}"
+									th:each="event : ${upComingEvents}" class="media event">
+									<a class="pull-left date" style="background: rgb(46, 48, 78);">
+										<p class="month" style="font-size: x-large;"
+											th:text="${#temporals.monthNameShort(event.startTime)}"></p>
+										<p class="day" th:text="${#temporals.day(event.startTime)}"></p>
+									</a>
+									<div class="media-body">
+										<ul class="list-unstyled user_data" style="font-size: medium;">
+											<li><i class="fa fa-bullhorn"></i><strong
+												th:text="' ' + ${event.name}"></strong></li>
+											<li><i class="fa fa-at"></i><strong
+												th:text="' ' + ${event.venue}"></strong></li>
+											<li><i class="fa fa-clock-o"></i><strong
+												th:text="' ' + ${#temporals.format(event.startTime, 'h:mm a')} + ' To ' + ${#temporals.format(event.endTime, 'h:mm a')}"></strong></li>
+										</ul>
+									</div>
+									<p>
+										<span style="text-align: justify; font-size: small;"
+											th:text="${#strings.abbreviate(event.description,100)} + ' '"></span>
+										<a th:href="@{public/event/{eventId}(eventId=${event.id})}">See
+											more </a>
+									</p>
+									<img th:if="${event.hasCoverPicture}"
+										class="img-responsive avatar-view"
+										style="margin: 0 auto; max-height: 200px;"
+										th:src="@{/index/getIndexEventCoverPicture/{parentId}(parentId=${event.id})}">
+									<br /> <br />
+								</article>
+								<article th:if="${upComingEvents.isEmpty()}" class="media event">
+									<br /> <br /> <br /> <img
+										th:src="@{viewResources/images/eventsComingSoon.jpg}"
+										class="img-responsive"
+										style="margin: 0 auto; max-height: 400px;"><br /> <br />
+								</article>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-sm-8 col-xs-12">
+						<div class="row">
+							<div th:if="${justEndedEvent != null && justEndedEvent.hasPhoto}"
+								class="col-md-12 col-sm-12 col-xs-12">
+								<div class="alert alert-warning has-feedback" role="alert"
+									style="margin: 0%;">
+									<h2>
+										<strong>Just Ended in ISAG | </strong> <span
+											th:text="${justEndedEvent.name} + ' @ ' + ${justEndedEvent.venue} + '... '"></span><a
+											th:href="@{public/event/{eventId}(eventId=${justEndedEvent.id})}"
+											style="font-size: small; color: white;">See more </a>
+									</h2>
+								</div>
+								<div class="panel panel-body">
+									<div id="myCarousel" class="carousel slide"
+										data-ride="carousel" style="height: 340px;">
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner" role="listbox">
+											<div th:each="photo , iterStat : ${justEndedEventPhotos}"
+												class="item "
+												th:classappend="(${iterStat.first ? 'active' : ''})">
+												<img th:src="@{/getPicture/{photoId}(photoId=${photo.id})}"
+													alt="..." class="img-responsive"
+													style="margin: 0 auto; max-height: 340px;">
+											</div>
+										</div>
+
+										<!-- Left and right controls -->
+										<a class="left carousel-control" href="#myCarousel"
+											role="button" data-slide="prev"> <span
+											class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+											<span class="sr-only">Previous</span>
+										</a> <a class="right carousel-control" href="#myCarousel"
+											role="button" data-slide="next"> <span
+											class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+											<span class="sr-only">Next</span>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div
+								th:if="${justEndedEvent != null && !justEndedEvent.hasPhoto}"
+								class="col-md-12 col-sm-12 col-xs-12">
+								<div class="alert alert-warning has-feedback" role="alert"
+									style="margin: 0%;">
+									<h2>
+										<strong>Just Ended in ISAG | </strong> <span
+											th:text="${justEndedEvent.name} + ' @ ' + ${justEndedEvent.venue} + '... '"></span><a
+											th:href="@{public/event/{eventId}(eventId=${justEndedEvent.id})}"
+											style="font-size: small; color: white;">See more </a>
+									</h2>
+								</div>
+								<div class="panel panel-body">
+									<div class="panel panel-body">
+										<div id="myCarousel" class="carousel slide"
+											data-ride="carousel" style="height: 340px;">
+											<!-- Wrapper for slides -->
+											<div class="carousel-inner" role="listbox">
+												<div class="item active">
+													<img th:src="@{viewResources/images/noImageYet.jpg}"
+														class="img-responsive"
+														style="margin: 0 auto; max-height: 340px;">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div th:if="${justEndedEvent == null}"
+								class="col-md-12 col-sm-12 col-xs-12">
+								<div class="alert alert-warning has-feedback" role="alert"
+									style="margin: 0%;">
+									<h2>
+										<strong>Just Ended in ISAG | </strong>
+								</div>
+								<div class="panel panel-body">
+									<div id="myCarousel" class="carousel slide"
+										data-ride="carousel" style="height: 340px;">
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner" role="listbox">
+											<div class="item active">
+												<img th:src="@{viewResources/images/coming-soon.jpg}"
+													class="img-responsive"
+													style="margin: 0 auto; max-height: 340px;">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Banner Adverts -->
+				<div th:include="fragments/adverts :: banner-adverts"></div>
+				<!-- Banner Adverts -->
+
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div th:if="${blog} == null">
+									<div class="alert alert-warning has-feedback" role="alert"
+										style="margin: 0%;">
+										<h2>
+											<strong>ISAG NEWS</strong> | ISAG meets with the First Lady -
+											Her Excellency Madame Akufo-Addo
+										</h2>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<div class="item">
+												<img th:src="@{viewResources/images/1stLady.jpg}"
+													alt="Flower" class="img-responsive" style="margin: 0 auto;">
+											</div>
+											<br>
+											<div class="media-body">
+												<p
+													style="text-align: justify; font-size: medium; color: rgb(41, 53, 86);">
+													Message from the ISAG President<br> Dear ISAG members
+													and potential members,<br> <br> As we all know,
+													ISAG was founded over twenty years ago as a self-help
+													association to assist foreign spouses to integrate fully
+													into Ghanaian society and to lead productive lives as
+													members of their Ghanaian families, their communities, and
+													the nation. <br>It was clear then, as it is now, that
+													foreign spouses need a support system and an association
+													that can advocate for their interests. <br>As many of
+													you know, ISAG played a key role in changing the law to
+													recognize foreign spouses as a unique group to be eligible
+													for the Indefinite Residence Permit, and later we advocated
+													and achieved the foreign spouses&#8217 exemption from the
+													GIPC capital investment requirements for foreigners who are
+													setting up a business. <br>These were major
+													accomplishments for ISAG on behalf of foreign spouses.
+													However, there is still quite a lot of work to do to in the
+													area of advocacy. For example, ISAG is now committed to
+													working with Ghana&#8217s leaders to ensure that foreign
+													spouses of Ghanaians and their children continue to be
+													recognized as a unique group under the law as the country
+													develops a new National Identify Card and Non-Citizen Card.
+													<br> <br>Two weeks ago, as part of our advocacy
+													efforts, a small delegation of ISAG members paid a courtesy
+													call to Ghana&#8217s First Lady, Her Excellency Madame
+													Akufo-Addo. The goal of our visit was to introduce ISAG to
+													the First Lady, share with her our mission and history, and
+													ask for her help and guidance on key advocacy issues. We
+													had a very positive reception and are optimistic that she
+													will follow through on her verbal commitment to assist ISAG
+													in meeting with relevant leaders and institutions to hear
+													our position. <br> <br>We see this as a very
+													important step; however, we also recognize that our ability
+													to maintain our core mandate requires a solid and engaged
+													membership. Our strength is in our numbers, and our numbers
+													is our membership! I am writing to you today, to share this
+													exciting news and to let everyone know that we are actively
+													pursuing an audience with the heads of key institutions on
+													the Non-Citizen Card issue. <br> <br>I am also
+													writing to let you know that while the Executive Council
+													has been very busy, and though we&#8217ve had good
+													attendance at meetings and events, our active membership
+													numbers are low. Out of 244 potential members, only 26
+													people have paid their 2017 membership dues. To be able to
+													cover our costs, to create a vibrant social space for
+													foreign spouses and families, to strengthen our business
+													network of foreign spouses, and to advocate on important
+													issues we need to receive membership dues. <br>Send an
+													email to isag1994ghana@gmail.com about how to make payment
+													using different methods, and we hope that you will follow
+													up and register/renew your membership. <br> <br>Finally,
+													I am writing to let members know that in late December,
+													Alan Beales and his son were involved in a bad motorcycle
+													accident. While the son is fine, Alan&#8217s broken arm is
+													taking a bit longer to heal. Please join me in wishing him
+													well and expressing our hope that we will see him soon.<br>
+													<br> Anneke will be following up shortly with an email
+													about upcoming events, including an Easter get-together and
+													a Car Boot Sale at Baatsona at the end of the month. Have a
+													great start to the week! <br> <br>Best, Rebecca
+													ISAG President
+												</p>
+											</div>
+										</div>
+										<!-- /.panel-body -->
+										<div class="alert alert-success has-feedback" role="alert"
+											style="margin: 0%; padding: 0%; padding-left: 15px; margin-left: 1%; margin-right: 1%;">
+											<h2>
+												<strong>Login To Share Your Thoughts With Us!</strong><span
+													class="fa fa-comments-o feedback right" aria-hidden="true"
+													style="font-size: 25px !important; padding-right: 15px;"></span>
+											</h2>
+										</div>
+										<!-- /.panel-body -->
+									</div>
+								</div>
+								<div th:if="${blog != null}">
+									<div class="alert alert-warning has-feedback" role="alert"
+										style="margin: 0%;">
+										<h2>
+											<strong>ISAG NEWS | </strong> <span th:utext="${blog.title}"></span>
+										</h2>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<div th:if="${blog.hasCoverPhoto}" class="item">
+												<img
+													th:src="@{public/getBlogPicture/{parentId}(parentId=${blog.id})}"
+													alt="..." class="img-responsive fixed_height_390"
+													style="margin: 0 auto;">
+											</div>
+											<br>
+											<div class="media-body">
+												<pre
+													style="white-space: pre-wrap; word-break: normal; text-align: justify; font-size: medium; color: rgb(41, 53, 86); overflow: auto; font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif; background-color: white; border: none;"
+													th:utext="${blog.content}"></pre>
+											</div>
+										</div>
+										<div sec:authorize="isAnonymous()"
+											class="alert alert-success has-feedback" role="alert"
+											style="margin: 0%; padding: 0%; padding-left: 15px; margin-left: 1%; margin-right: 1%;">
+											<h2>
+												<strong>Login To Share Your Thoughts With Us!</strong><span
+													class="fa fa-comments-o feedback right" aria-hidden="true"
+													style="font-size: 25px !important; padding-right: 15px;"></span>
+											</h2>
+										</div>
+										<br /> <br />
+										<div sec:authorize="isAuthenticated()">
+											<!-- /.panel-body -->
+											<div class="alert alert-success has-feedback" role="alert"
+												style="margin: 0%; padding: 0%; padding-left: 15px; margin-left: 1%; margin-right: 1%;">
+												<h2>
+													<strong>Share Your Thoughts With Us | Comment
+														Below!</strong><span class="fa fa-comments-o feedback right"
+														aria-hidden="true"
+														style="font-size: 25px !important; padding-right: 15px;"></span>
+												</h2>
+											</div>
+											<div class="panel-body">
+												<div>
+
+													<div class="fb-like"
+														th:attr="data-href= 'http://isag-ghana.uksouth.cloudapp.azure.com/alpha/public/news/' + ${blog.id}"
+														data-layout="button_count" data-action="like"
+														data-size="large" data-show-faces="true"
+														data-share="false"></div>
+													<div class="fb-share-button"
+														th:attr="data-href= 'http://isag-ghana.uksouth.cloudapp.azure.com/alpha/public/news/' + ${blog.id}"
+														data-layout="button_count" data-size="large"
+														data-mobile-iframe="true">
+														<a class="fb-xfbml-parse-ignore" target="_blank"
+															href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Falpha%2Fnews%2Ftitle&amp;src=sdkpreparse">Share</a>
+													</div>
+													<form style="width: auto;" th:action="@{../news-list}"
+														method="GET">
+														<button style="float: right;" type="submit"
+															class="btn btn-success">Back To News List</button>
+													</form>
+												</div>
+
+												<div class="fb-comments"
+													th:attr="data-href= 'http://isag-ghana.uksouth.cloudapp.azure.com/alpha/public/news/' + ${blog.id}"
+													data-width="675" data-numposts="5"></div>
+											</div>
+										</div>
+										<!-- /.panel-body -->
+									</div>
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>What We Do...</strong><span
+												class="fa fa-first-order feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<div class="panel-body">
+										<div class="x_content"></div>
+										<ul class="list-unstyled timeline widget">
+											<li>
+												<div class="block">
+													<div class="block_content">
+														<h2 class="title">
+															<strong><a>AS FOREIGN SPOUSES</a></strong>
+														</h2>
+														<a class="excerpt" style="text-align: justify;">We
+															advocate and promote the full legal rights of our members
+															to live and work as Ghanaian spouses do. We are members
+															of Ghanaian families and therefore uphold the importance
+															of the family in the full development of the individual
+															and the nation.</a>
+													</div>
+												</div>
+												<div class="block">
+													<div class="block_content">
+														<h2 class="title">
+															<strong><a>AS PARENTS OF GHANAIAN CHILDREN</a></strong>
+														</h2>
+														<a class="excerpt" style="text-align: justify;">We
+															assist our members in their special responsibility of
+															nurturing citizens of dual heritage. We offer the
+															additional support that a member&#8217s family would
+															normally provide as we are individuals away from their
+															native homes.</a>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>Today's News Headlines</strong><span
+												class="fa fa-newspaper-o feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<div class="clearfix"></div>
+									<select id="NewsAgency" name="NewsAgency"
+										onchange="retrieveNewsCategories()"
+										class="form-control col-md-6" style="float: left;">
+										<option>Select News Agency</option>
+										<option>CNN</option>
+										<option>BBC</option>
+										<option>DW</option>
+										<option>MyJoy Online</option>
+										<option>Ghana Web</option>
+									</select> <select id="NewsCategories" name="feedURL"
+										onchange="retrieveNewsItems()" class="form-control col-md-6"
+										style="float: right;">
+										<option>Select Category</option>
+									</select>
+									<div class="x_panel fixed_height_390" style="overflow: scroll;">
+										<div class="x_content">
+											<div class="dashboard-widget-content">
+												<ul id="rssFeeds" class="list-unstyled timeline widget">
+												</ul>
+											</div>
+										</div>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+								<div class="panel panel-default">
+									<div class="alert alert-success has-feedback" role="alert"
+										style="margin: 0%; padding: 0%; padding-left: 15px;">
+										<h2>
+											<strong>Our Partners And Sponsors</strong><span
+												class="fa fa-certificate feedback right" aria-hidden="true"
+												style="font-size: 25px !important; padding-right: 15px;"></span>
+										</h2>
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a th:href="@{public/contact-us}" class="list-group-item">
+											<img
+											th:src="@{viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<!-- PNotify -->
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/pnotify/dist/pnotify.js}"></script>
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/pnotify/dist/pnotify.buttons.js}"></script>
+	<script
+		th:src="@{viewResources/bootstrap3/vendors/pnotify/dist/pnotify.nonblock.js}"></script>
+
+	<!-- TimeAgo -->
+	<script th:src="@{viewResources/bootstrap3/build/js/jquery.timeago.js}"
+		type="text/javascript"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("time.timeago").timeago();
+		});
+
+		$(".timeline:before").addClass("hidden");
+	</script>
+
+	<script type="text/javascript">
+		function retrieveNewsCategories() {
+			if ($('#NewsAgency').find(":selected").text() == 'CNN') {
+				$("#NewsCategories")
+						.empty()
+						.append('<option> CNN News-Categories </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/cnn_latest.rss> Most Recent </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition.rss> Top Stories </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_world.rss> World </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_africa.rss> Africa </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_americas.rss> Americas </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_asia.rss> Asia </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_europe.rss> Europe </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_meast.rss> Middle East </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_us.rss> U.S. </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/money_news_international.rss> Money </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_technology.rss> Technology </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_space.rss> Science & Space </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_entertainment.rss> Entertainment </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_sport.rss> World Sport </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_football.rss> Football </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_golf.rss> Golf </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_motorsport.rss> Motorsport </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_tennis.rss> Tennis </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/edition_travel.rss> Travel </option>')
+						.append(
+								'<option value = http://rss.cnn.com/rss/cnn_freevideo.rss> Video </option>');
+			} else if ($('#NewsAgency').find(":selected").text() == 'BBC') {
+				$("#NewsCategories")
+						.empty()
+						.append('<option> BBC News-Categories </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/rss.xml?edition=uk> News Front Page </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/world/rss.xml?edition=uk> World </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/uk/rss.xml?edition=uk> UK </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/england/rss.xml?edition=uk> England </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/northern_ireland/rss.xml?edition=uk> Northern Ireland </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/scotland/rss.xml?edition=uk> Scotland </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/wales/rss.xml?edition=uk> Wales </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/business/rss.xml?edition=uk> Business </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/politics/rss.xml?edition=uk> UK Politics </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk> Health </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/education/rss.xml?edition=uk> Education & Family </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/science_and_environment/rss.xml?edition=uk> Science & Environment </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/technology/rss.xml?edition=uk> Technology </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml?edition=uk> Entertainment & Arts </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/have_your_say/rss.xml?edition=uk> Have Your Say </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/magazine/rss.xml> Magazine </option>')
+						.append(
+								'<option value = http://feeds.bbci.co.uk/news/system/latest_published_content/rss.xml> Latest Published Stories </option>');
+			} else if ($('#NewsAgency').find(":selected").text() == 'DW') {
+				$("#NewsCategories")
+						.empty()
+						.append('<option> DW News-Categories </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-top> Top Stories </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-ger> Germany </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-world> World </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-eu> Europe </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-bus> Business </option>')
+						.append(
+								'<option value = http://rss.dw.com/xml/rss_en_science> Science </option>')
+						.append(
+								'<option value = http://rss.dw.com/xml/rss_en_environment> Environment </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-cul> Culture and Lifestyle </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-sports> Sports </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-visitgermany> Visit Germany </option>')
+						.append(
+								'<option value = http://rss.dw.com/rdf/rss-en-asia> Asia </option>');
+			} else if ($('#NewsAgency').find(":selected").text() == 'MyJoy Online') {
+				$("#NewsCategories")
+						.empty()
+						.append('<option> JoyNews-Categories </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_edition.xml> Local News </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_world.xml> World </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_sports.xml> Sports </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_business.xml> Business </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_lifestyle.xml> Lifestyle </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_opinion.xml> Opinion </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_entertainment.xml> Entertainment </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_technology.xml> Technology </option>')
+						.append(
+								'<option value = http://www.myjoyonline.com/pages/rss/site_politics.xml> Politics </option>');
+			} else if ($('#NewsAgency').find(":selected").text() == 'Ghana Web') {
+				$("#NewsCategories")
+						.empty()
+						.append('<option> GhanaWeb-Categories </option>')
+						.append(
+								'<option value = http://cdn.ghanaweb.com/feed/newsfeed.xml> Ghana News </option>')
+						.append(
+								'<option value = http://cdn.ghanaweb.com/feed/soccerfeed.xml> Ghana Soccer </option>')
+						.append(
+								'<option value = http://cdn.ghanaweb.com/feed/other_sports.xml> Ghana Sports </option>')
+						.append(
+								'<option value = http://cdn.ghanaweb.com/feed/religion.xml> Religious News </option>')
+						.append(
+								'<option value = http://cdn.ghanaweb.com/feed/entertainment.xml> Ghanaian Entertainment </option>');
+			} else {
+				$("#NewsCategories").empty().append(
+						'<option value = > Select Category</option>');
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function getNewsFeeds() {
+
+			$("#rssFeeds")
+					.append(
+							'<div class="block"><div class="block_content"><h2 class="title"><strong><a>Loading... please wait</a></strong></h2></div></div>');
+			$
+					.getJSON(
+							"public/rss",
+							{
+								feedURL : 'http://rss.cnn.com/rss/cnn_latest.rss',
+								newsAgency : 'CNN'
+							},
+							function(data) {
+								$("#rssFeeds").empty();
+								if (data.length == 0) {
+									$("#rssFeeds")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title"><strong><a>'
+															+ 'CNN News'
+															+ ' - No feed is avialable at the moment, please try agian later</a></strong></h2></div></div>');
+
+								} else {
+									for ( var index_i in data) {
+										$("#rssFeeds")
+												.append(
+														'<li>'
+																+ ' <div class="block">'
+																+ '<div class="block_content">'
+																+ '<h2 class="title">'
+																+ '<strong><a href="' 		
+															+ data[index_i].link
+															+ '" target="_blank"> '
+																+ data[index_i].title
+																+ '</a></strong>'
+																+ '</h2>'
+																+ '<div class="byline">'
+																+ '<a> <span> <time class="timeago"' 	
+															+ 'datetime="' 			
+															+ data[index_i].date 			
+															+ '"></time>'
+																+ '</span>'
+																+ '</a>'
+																+ '</div>'
+																+ '<a href="' 	
+															+ data[index_i].link
+															+ '" target="_blank"' 	
+															+ 'class="excerpt" style="text-align: justify;">'
+																+ data[index_i].description
+																+ '</a>'
+																+ '</div>'
+																+ '</div>'
+																+ '</li>');
+									}
+								}
+
+							})
+					.fail(
+							function(jqxhr, textStatus, error) {
+								$("#rssFeeds").empty();
+								$("#rssFeeds")
+										.append(
+												'<div class="block"><div class="block_content"><h2 class="title"><strong><a>'
+														+ 'CNN News'
+														+ ' - Network Connection Error, please try again later</a></strong></h2></div></div>');
+							});
+		}
+
+		function retrieveNewsItems() {
+			$("#rssFeeds").empty();
+			$("#rssFeeds")
+					.append(
+							'<div class="block"><div class="block_content"><h2 class="title"><strong><a>Loading... please wait</a></strong></h2></div></div>');
+
+			$
+					.getJSON(
+							"public/rss",
+							{
+								feedURL : $('#NewsCategories').val(),
+								newsAgency : $('#NewsAgency').find(":selected")
+										.text()
+							},
+							function(data) {
+								$("#rssFeeds").empty();
+								if (data.length == 0) {
+									$("#rssFeeds")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title"><strong><a>'
+															+ $(
+																	'#NewsCategories')
+																	.find(
+																			":selected")
+																	.text()
+															+ ' - No feed is avialable at the moment, please try agian later</a></strong></h2></div></div>');
+
+								} else {
+									for ( var index_i in data) {
+										$("#rssFeeds")
+												.append(
+														'<li>'
+																+ ' <div class="block">'
+																+ '<div class="block_content">'
+																+ '<h2 class="title">'
+																+ '<strong><a href="' 		
+															+ data[index_i].link
+															+ '" target="_blank"> '
+																+ data[index_i].title
+																+ '</a></strong>'
+																+ '</h2>'
+																+ '<div class="byline">'
+																+ '<a> <span> <time class="timeago"' 	
+															+ 'datetime="' 			
+															+ data[index_i].date 			
+															+ '"></time>'
+																+ '</span>'
+																+ '</a>'
+																+ '</div>'
+																+ '<a href="' 	
+															+ data[index_i].link
+															+ '" target="_blank"' 	
+															+ 'class="excerpt" style="text-align: justify;">'
+																+ data[index_i].description
+																+ '</a>'
+																+ '</div>'
+																+ '</div>'
+																+ '</li>');
+									}
+								}
+							})
+					.fail(
+							function(jqxhr, textStatus, error) {
+								$("#rssFeeds").empty();
+								$("#rssFeeds")
+										.append(
+												'<div class="block"><div class="block_content"><h2 class="title"><strong><a>'
+														+ $('#NewsCategories')
+																.find(
+																		":selected")
+																.text()
+														+ ' - Network Connection Error, please try again later</a></strong></h2></div></div>');
+							});
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

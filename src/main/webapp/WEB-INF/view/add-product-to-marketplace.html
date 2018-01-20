@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="author" content="ISAG-Ghana">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage"
+	content="../viewResources/images/logo.png">
+<meta name="theme-color" content="#ffffff">
+
+<title>ISAG-Add Product</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link th:href="@{../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../viewResources/images/HomePage/Favicons/manifest.json}">
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="panel panel-default">
+									<div class="alert alert-warning" role="alert"
+										style="margin: 0%;">
+										<h2>
+											<strong>Add Your Item Here</strong>
+										</h2>
+									</div>
+									<div class="panel-body">
+										<div class="x_content">
+											<br />
+											<form class="form-horizontal form-label-left input_mask"
+												th:action="@{../member/add-product-to-marketplace}"
+												th:object="${addProductFormDTO}" method="POST"
+												enctype="multipart/form-data">
+												<div th:if="${#fields.hasErrors('*')}"
+													class="alert alert-danger alert-dismissible fade in"
+													id="formsDiv">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+													<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+												</div>
+												<div th:if="${AddedSuccessfully}"
+													class="alert alert-success alert-dismissible fade in"
+													id="formsDiv">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+													<p th:text="${AddedSuccessfully}"
+														style="text-align: center; font-size: medium;"></p>
+												</div>
+												<div th:if="${fileFormatError}"
+													class="alert alert-danger alert-dismissible fade in"
+													id="formsDiv">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+													<p th:text="${fileFormatError}"
+														style="text-align: center; font-size: medium;"></p>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+													th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+													<input type="text" class="form-control has-feedback-left"
+														id="inputSuccess2" placeholder="Name of Item" name="name"
+														th:field="*{name}" required="required"> <span
+														class="fa fa-info form-control-feedback left"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+													th:classappend="${#fields.hasErrors('location')}? 'has-error'">
+													<input type="text" class="form-control has-feedback-left"
+														id="inputSuccess4"
+														placeholder="Item Location: City / Town" name="location"
+														th:field="*{location}" required="required"> <span
+														class="fa fa-map-marker form-control-feedback left"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+													th:classappend="${#fields.hasErrors('currency')}? 'has-error'">
+													<select type="text" class="form-control has-feedback-left"
+														id="inputSuccess2" placeholder="Currency" name="currency"
+														th:field="*{currency}">
+														<option value="">Select Currency...</option>
+														<option value="GH&#x20b5">Ghana Cedis</option>
+														<option value="US&#x0024">US Dollars</option>
+														<option value="EU&#8364">Euro</option>
+														<option value="GB&#x00a3">British Pounds</option>
+													</select> <span class="fa fa-usd form-control-feedback left"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+													th:classappend="${#fields.hasErrors('price')}? 'has-error'">
+													<input type="text" class="form-control has-feedback-left"
+														id="inputSuccess3" placeholder="Price" name="price"
+														th:field="*{price}" required="required"> <span
+														class="fa fa-money form-control-feedback left"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12 form-group" style="margin-top: 2%;"
+													th:classappend="${#fields.hasErrors('shortDescription')}? 'has-error'">
+													<textarea rows="7" type="text" class="form-control"
+														id="inputSuccess2" placeholder="Item Description Here..."
+														name="shortDescription" th:field="*{shortDescription}">
+													</textarea>
+												</div>
+												<div class="col-xs-12 form-group" style="margin-top: 2%;">
+													<label>Enter the keywords that describe your item
+														below, using #HashTags</label> <input type="text"
+														class="form-control" id="tags"
+														placeholder="Example of HashTags :   #Phone   #iPhone   #iPhone-7s"
+														name="tags">
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+													style="margin-top: 2%;">
+													<label>Upload Cover Photo For Item</label> <input
+														type="file" class="form-control" id="coverPicture"
+														name="coverPicture"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="col-md-12	">
+													<div class="alert alert-success alert-dismissible fade in"
+														role="alert">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close"></button>
+														<p style="text-align: center;">
+															<strong>You can now add a max of 4 other photos
+																of your item here</strong>
+														</p>
+													</div>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="files"
+														name="files"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="files"
+														name="files"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="files"
+														name="files"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div
+													class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+													<input type="file" class="form-control" id="files"
+														name="files"> <span
+														class="fa fa-camera form-control-feedback right"
+														aria-hidden="true"></span>
+												</div>
+												<div class="form-group">
+													<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+														<button type="button" class="btn btn-primary">Cancel</button>
+														<button class="btn btn-primary" type="reset">Reset</button>
+														<button type="submit" class="btn btn-success">Submit</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<!-- /.panel -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<i class="fa fa-certificate fa-fw"></i> Partners
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a href="#" class="list-group-item"> <img
+											th:src="@{../viewResources/images/Adverts/jolina.jpg}"
+											alt="Flower" class="img-responsive" style="margin: 0 auto;">
+										</a> <a href="#" class="list-group-item"> <img
+											th:src="@{../viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+										<div class="x_content">
+											<div class="dashboard-widget-content">
+												<ul class="list-unstyled timeline widget">
+													<li>
+														<div class="block">
+															<div class="block_content">
+																<h2 class="title">
+																	<strong><a>AS FOREIGN SPOUSES</a></strong>
+																</h2>
+																<a class="excerpt" style="text-align: justify;">We
+																	advocate and promote the full legal rights of our
+																	members to live and work as Ghanaian spouses do. We are
+																	members of Ghanaian families and therefore uphold the
+																	importance of the family in the full development of the
+																	individual and the nation.</a>
+															</div>
+														</div>
+														<div class="block">
+															<div class="block_content">
+																<h2 class="title">
+																	<strong><a>AS PARENTS OF GHANAIAN CHILDREN</a></strong>
+																</h2>
+																<a class="excerpt" style="text-align: justify;">We
+																	assist our members in their special responsibility of
+																	nurturing citizens of dual heritage. We offer the
+																	additional support that a member’s family would
+																	normally provide as we are individuals away from their
+																	native homes.</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<script>
+		$(document).ready(function() {
+			// Handler for .ready() called.
+			$('html, body').animate({
+				scrollTop : $('#formsDiv').offset().top
+			}, 'slow');
+		});
+	</script>
+
+
+</body>
+</html>
+
+
+
+

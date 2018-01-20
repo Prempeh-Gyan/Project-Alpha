@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>ISAG-Outbox</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link
+	th:href="@{../../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- iCheck -->
+<link
+	th:href="@{../../viewResources/bootstrap3/vendors/iCheck/skins/flat/green.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../../viewResources/images/HomePage/Favicons/manifest.json}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- Banner Adverts -->
+				<div th:include="fragments/adverts-inner-inner :: banner-adverts"></div>
+				<!-- Banner Adverts -->
+				<div class="clearfix"></div>
+
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8" style="float: right;">
+								<div class="x_content"></div>
+							</div>
+							<!-- /.col-lg-8 -->
+						</div>
+						<!-- /.row -->
+						<!-- page content -->
+						<div class="" role="main">
+							<div class="">
+								<div class="clearfix"></div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="x_panel">
+											<div class="x_content">
+												<div class="row">
+													<div th:if="${success}"
+														class="alert alert-success alert-dismissible fade in"
+														id="formsDiv">
+														<button type="button" class="close" data-dismiss="alert"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+														<p th:text="${success}"
+															style="text-align: center; font-size: medium;"></p>
+													</div>
+													<div class="col-sm-3 mail_list_column" style="width: 45%;">
+														<button id="compose"
+															class="btn btn-sm btn-success btn-block" type="button"
+															onclick="compose();">COMPOSE</button>
+														<div sd:page-object="${page}"
+															sd:pagination-qualifier="messagePage">
+															<table
+																class="table table-striped table-hover jambo_table bulk_action">
+																<thead>
+																	<tr class="headings">
+																		<th class="column-title">Sender</th>
+																		<th class="column-title">Subject</th>
+																		<th class="column-title">Date</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr th:if="${page}" th:each="row : ${page}"
+																		class="even pointer clickable-row"
+																		th:attr="data-href=@{{messageId}(messageId=${row.id})},alt=#{read message}">
+																		<td style="width: 30%;"
+																			th:text="${row.sender.profile.firstName + ' ' + row.sender.profile.lastName }">sendersName</td>
+																		<td style="width: 50%;"
+																			th:styleappend="${#strings.contains(row.subject,' ') ? 'word-break: normal;' : 'word-break: break-all;'}"
+																			th:text="${row.subject}">Name</td>
+																		<td style="width: 20%;"><time class="timeago"
+																				th:datetime="${row.date}">July 17, 2017</time></td>
+																	</tr>
+																</tbody>
+															</table>
+															<div th:if="${page}" class="row">
+																<div class="col-sm-6">
+																	<div sd:pagination-summary="">info</div>
+																</div>
+																<div class="col-sm-6">
+																	<nav class="pull-right">
+																		<ul class="pagination" sd:pagination="full">
+																			<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+																			<li class="disabled"><a href="#"
+																				aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+																			<li class="active"><a href="#">1 <span
+																					class="sr-only">(current)</span></a></li>
+																		</ul>
+																	</nav>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- /MAIL LIST -->
+													<!-- CONTENT MAIL -->
+													<div th:if="${actualMessage}"
+														class="col-sm-9 mail_view composeMessage replyMessage forwardMessage deleteMessage"
+														style="width: 55%;" id="cloneBody">
+
+														<!-- start accordion -->
+														<div class="accordion" id="accordion" role="tablist"
+															aria-multiselectable="true">
+															<div class="panel">
+																<a class="panel-heading" role="tab"
+																	th:id="${'headingOne'}" data-toggle="collapse"
+																	data-parent="#accordion" th:href="${'#collapseOne'}"
+																	th:attr="aria-expanded= ${'true'}, aria-controls= ${'collapseOne'}">
+																	<h4 class="panel-title" style=""
+																		th:text="${actualMessage.sender.profile.firstName + ' ...'}"></h4>
+																</a>
+																<div th:id="${'collapseOne'}"
+																	class="panel-collapse collapse"
+																	th:classappend="${'in'}"
+																	role="tabpanel"
+																	th:attr="aria-labelledby=${'headingOne'}">
+																	<div class="panel-body">
+																		<div class="inbox-body">
+																			<div class="mail_heading row">
+																				<div class="col-md-8">
+																					<div class="btn-group">
+																						<button class="btn btn-sm btn-default"
+																							type="button" data-placement="top"
+																							data-toggle="tooltip"
+																							data-original-title="Forward"
+																							onclick="forward();">
+																							<i class="fa fa-share"></i>
+																						</button>
+																						<button class="btn btn-sm btn-default"
+																							type="button" data-placement="top"
+																							data-toggle="tooltip" data-original-title="Print">
+																							<i class="fa fa-print"></i>
+																						</button>
+																					</div>
+																				</div>
+																				<div class="col-md-4 text-right">
+																					<p class="date">
+																						<span
+																							th:text="${#temporals.monthNameShort(actualMessage.date)} + ' ' + ${#temporals.day(actualMessage.date)} + ' ' + ${#temporals.format(actualMessage.date, 'yyyy h:mm a')}"></span><br />
+																						<time class="
+																							timeago"
+																							th:datetime="${actualMessage.date}">July 17,
+																							2017</time>
+																					</p>
+																				</div>
+																				<div class="col-md-12">
+																					<h4 style=""
+																						th:styleappend="${#strings.contains(actualMessage.subject,' ') ? 'word-break: normal;' : 'word-break: break-all;'}"
+																						th:utext="${actualMessage.subject}"></h4>
+																				</div>
+																			</div>
+																			<div class="sender-info">
+																				<div class="row">
+																					<div class="col-md-12">
+																						<strong
+																							th:text="${'From: ' + actualMessage.sendersName}"
+																							style=""
+																							th:styleappend="${#strings.contains(actualMessage.sendersName,' ') ? 'word-break: normal;' : 'word-break: break-all;'}"></strong>
+																						<span
+																							th:text="${' | ' + actualMessage.sendersEmail + ' | ' + actualMessage.sendersPhoneNumber}"></span><a
+																							class="sender-dropdown"></a>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="view-mail">
+																				<pre
+																					style="white-space: pre-wrap; text-align: justify; font-size: medium; color: rgb(41, 53, 86); overflow: auto; font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif; background-color: white; border: none;"
+																					th:styleappend="${#strings.contains(actualMessage.message,' ') ? 'word-break: normal;' : 'word-break: break-all;'}"
+																					th:utext="${actualMessage.message}"></pre>
+																			</div>
+																			<div class="btn-group">
+																				<button class="btn btn-sm btn-default" type="button"
+																					data-placement="top" data-toggle="tooltip"
+																					data-original-title="Forward" onclick="forward();">
+																					<i class="fa fa-share"></i>
+																				</button>
+																				<button class="btn btn-sm btn-default" type="button"
+																					data-placement="top" data-toggle="tooltip"
+																					data-original-title="Print">
+																					<i class="fa fa-print"></i>
+																				</button>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- end of accordion -->
+
+														<!-- compose -->
+														<div id="composeMessage" style="display: none;">
+															<div class="form-top">
+																<div class="form-top-left">
+																	<h3 style="text-align: center;">Compose New
+																		Message</h3>
+																</div>
+															</div>
+															<div class="form-bottom contact-form">
+																<form class="form-horizontal form-label-left input_mask">
+																	<div class="form-group has-feedback">
+																		<textarea rows="1" cols="" placeholder="To:"
+																			class="form-control has-feedback-left"
+																			id="to_recipients" name="to_recipients"
+																			data-toggle="modal" data-target=".listOfRecipients"
+																			required="required" readonly="readonly"></textarea>
+																		<span class="fa fa-user form-control-feedback left"
+																			aria-hidden="true" style="border: none;"></span>
+																	</div>
+																	<div class="form-group has-feedback">
+																		<input type="text" required="required"
+																			class="form-control has-feedback-left" id="subject"
+																			placeholder="Subject:" name="subject"> <span
+																			class="fa fa-envelope form-control-feedback left"
+																			aria-hidden="true" style="border: none;"></span>
+																	</div>
+
+																	<div id="hiddenInputs">
+																		<input type="text" hidden="hidden" id="flag"
+																			name="flag" value="compose">
+																	</div>
+
+
+																	<div class="form-group">
+																		<textarea rows="4" cols=""
+																			placeholder="Enter message here..."
+																			class="form-control" id="message" name="message"></textarea>
+
+																	</div>
+																	<div class="form-group">
+																		<div style="margin: 0 auto; width: 100%;">
+																			<button type="button" class="btn btn-primary"
+																				onclick="compose();">Cancel</button>
+																			<button type="button" class="btn btn-success"
+																				onclick="sendMessage();">Send Message</button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+															<div id="messageStatus"></div>
+														</div>
+														<!-- /compose -->
+														<!-- Forward -->
+														<div id="forward" style="display: none;">
+															<div class="form-top">
+																<div class="form-top-left">
+																	<h3 style="text-align: center;">Forward Message</h3>
+																</div>
+															</div>
+															<div class="form-bottom contact-form">
+																<form class="form-horizontal form-label-left input_mask">
+																	<div class="form-group has-feedback">
+																		<textarea rows="1" cols="" placeholder="To:"
+																			class="form-control has-feedback-left"
+																			id="to_recipients" name="to_recipients"
+																			data-toggle="modal" data-target=".listOfRecipients"
+																			required="required" readonly="readonly"></textarea>
+																		<span class="fa fa-user form-control-feedback left"
+																			aria-hidden="true" style="border: none;"></span>
+																	</div>
+																	<div id="hiddenInputs">
+																		<input type="text" hidden="hidden" id="flag"
+																			name="flag" value="forward"><input
+																			type="text" hidden="hidden" id="parentMessage"
+																			name="parentMessage"
+																			th:value="${actualMessage.id}">
+																	</div>
+
+																	<div class="form-group">
+																		<textarea rows="4" cols=""
+																			placeholder="Enter message here..."
+																			class="form-control" id="message" name="message"></textarea>
+
+																	</div>
+																	<div class="form-group">
+																		<div style="margin: 0 auto; width: 100%;">
+																			<button type="button" class="btn btn-primary"
+																				onclick="forward();">Cancel</button>
+																			<button type="button" class="btn btn-success"
+																				onclick="sendMessage();">Forward Message</button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+															<div id="messageStatus"></div>
+														</div>
+														<!-- /Forward -->
+													</div>
+													<div th:if="${message} == null"
+														class="col-sm-9 mail_view composeMessage replyMessage forwardMessage deleteMessage"
+														style="width: 55%; float: right;" id="cloneBody">
+														<!-- compose -->
+														<div id="composeMessage" style="display: none;">
+															<div class="form-top">
+																<div class="form-top-left">
+																	<h3 style="text-align: center;">Compose New
+																		Message</h3>
+																</div>
+															</div>
+															<div class="form-bottom contact-form">
+																<form class="form-horizontal form-label-left input_mask">
+																	<div class="form-group has-feedback">
+																		<textarea rows="1" cols="" placeholder="To:"
+																			class="form-control has-feedback-left"
+																			id="to_recipients" name="to_recipients"
+																			data-toggle="modal" data-target=".listOfRecipients"
+																			required="required" readonly="readonly"></textarea>
+																		<span class="fa fa-user form-control-feedback left"
+																			aria-hidden="true" style="border: none;"></span>
+																	</div>
+																	<div class="form-group has-feedback">
+																		<input type="text" required="required"
+																			class="form-control has-feedback-left" id="subject"
+																			placeholder="Subject:" name="subject"> <span
+																			class="fa fa-envelope form-control-feedback left"
+																			aria-hidden="true" style="border: none;"></span>
+																	</div>
+
+																	<div id="hiddenInputs">
+																		<input type="text" hidden="hidden" id="flag"
+																			name="flag" value="compose">
+																	</div>
+
+																	<div class="form-group">
+																		<textarea rows="4" cols=""
+																			placeholder="Enter message here..."
+																			class="form-control" id="message" name="message"></textarea>
+
+																	</div>
+																	<div class="form-group">
+																		<div style="margin: 0 auto; width: 100%;">
+																			<button type="button" class="btn btn-primary"
+																				onclick="compose();">Cancel</button>
+																			<button type="button" class="btn btn-success"
+																				onclick="sendMessage();">Send</button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+															<div id="messageStatus"></div>
+														</div>
+														<!-- /compose -->
+													</div>
+													<!-- /CONTENT MAIL -->
+
+													<div class="modal fade listOfRecipients" tabindex="-1"
+														role="dialog" aria-hidden="true">
+														<div class="modal-dialog modal-lg">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close"
+																		data-dismiss="modal">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																	<h4 class="modal-title" id="myModalLabel">List of
+																		Members</h4>
+																</div>
+																<div class="modal-body">
+																	<div class="row" id="select_recipients">
+																		<div th:if="${users}" class="col-md-6"
+																			sd:page-object="${users}"
+																			sd:pagination-qualifier="usersPage">
+																			<div class="panel panel-default">
+																				<div class="panel-body">
+																					<table class="table table-striped table-hover">
+																						<thead>
+																							<tr>
+																								<th><a class="sorted"
+																									sd:pagination-sort="profile.firstName">Select
+																										User to send message</a></th>
+																							</tr>
+																						</thead>
+																						<tbody>
+																							<tr th:each="row : ${users}">
+																								<td class="checkbox"><input type="checkbox"
+																									class="flat listOfUsers"
+																									th:id="${row.profile.firstName + row.profile.lastName}"
+																									th:name="${' ' + row.profile.firstName + ' ' + row.profile.lastName}"
+																									th:text="${' ' + row.profile.firstName + ' ' + row.profile.lastName}"
+																									th:value="${row.id}"></td>
+																							</tr>
+																						</tbody>
+																					</table>
+
+																					<nav>
+																						<ul class="pagination" sd:pagination="full">
+																							<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+																							<li class="disabled"><a href="#"
+																								aria-label="Previous"><span
+																									aria-hidden="true">&laquo;</span></a></li>
+																							<li class="active"><a href="#">1 <span
+																									class="sr-only">(current)</span></a></li>
+																						</ul>
+																					</nav>
+																				</div>
+																			</div>
+																		</div>
+																		<div th:if="${groups}" class="col-md-6"
+																			sd:page-object="${groups}"
+																			sd:pagination-qualifier="groupsPage">
+																			<div class="panel panel-default">
+																				<div class="panel-body">
+																					<table class="table table-striped table-hover">
+																						<thead>
+																							<tr>
+																								<th><a class="sorted"
+																									sd:pagination-sort="name">Select Group to
+																										send message</a></th>
+																							</tr>
+																						</thead>
+																						<tbody>
+																							<tr th:each="row : ${groups}">
+																								<td class="checkbox"><input type="checkbox"
+																									class="flat listOfGroups" th:id="${row.name}"
+																									th:name="${row.name}" th:text="${row.name}"
+																									th:value="${row.id}"></td>
+																							</tr>
+																						</tbody>
+																					</table>
+
+																					<nav class="">
+																						<ul class="pagination" sd:pagination="full">
+																							<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+																							<li class="disabled"><a href="#"
+																								aria-label="Previous"><span
+																									aria-hidden="true">&laquo;</span></a></li>
+																							<li class="active"><a href="#">1 <span
+																									class="sr-only">(current)</span></a></li>
+																						</ul>
+																					</nav>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">Close</button>
+																	<button type="button" class="btn btn-primary"
+																		data-dismiss="modal">Submit</button>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /page content -->
+					</div>
+				</div>
+			</div>
+			<!-- /#page-wrapper -->
+
+		</div>
+		<!-- /#wrapper -->
+	</div>
+	<!-- /page content -->
+
+	<!-- footer content -->
+	<footer>
+		<div class="pull-right">
+			Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+				target="_blank">Prempeh Gyan</a> | &copy; 2017
+		</div>
+		<div class="clearfix"></div>
+	</footer>
+	<!-- /footer content -->
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<!-- iCheck -->
+	<!-- 	<script
+		th:src="@{../../viewResources/bootstrap3/vendors/iCheck/icheck.min.js}"></script> -->
+
+	<!-- TimeAgo -->
+	<script
+		th:src="@{../../viewResources/bootstrap3/build/js/jquery.timeago.js}"
+		type="text/javascript"></script>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("time.timeago").timeago();
+		});
+
+		jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
+
+		var composeClone = $("#composeMessage").clone(true);
+		var replyClone = $("#reply").clone(true);
+		var forwardClone = $("#forward").clone(true);
+		var deleteClone = $("#delete").clone(true);
+
+		function compose() {
+			console.log("compose");
+			if ($("#cloneBody").hasClass('composeMessage')) {
+				$("#composeMessage").toggle();
+
+				$("#cloneBody").removeClass('replyMessage');
+				$("#reply").remove();
+
+				$("#cloneBody").removeClass('forwardMessage');
+				$("#forward").remove();
+
+				$("#cloneBody").removeClass('deleteMessage');
+				$("#delete").remove();
+				$('html, body').animate({
+					scrollTop : $('#composeMessage').offset().top
+				}, 'slow');
+			} else {
+				$("#cloneBody").addClass('composeMessage');
+				$("#cloneBody").append(composeClone);
+				$("#composeMessage").toggle();
+
+				$("#cloneBody").removeClass('replyMessage');
+				$("#reply").remove();
+
+				$("#cloneBody").removeClass('forwardMessage');
+				$("#forward").remove();
+
+				$("#cloneBody").removeClass('deleteMessage');
+				$("#delete").remove();
+				$('html, body').animate({
+					scrollTop : $('#composeMessage').offset().top
+				}, 'slow');
+			}
+		}
+
+		function reply() {
+			console.log("reply");
+			if ($("#cloneBody").hasClass('replyMessage')) {
+				$("#reply").toggle();
+
+				$("#cloneBody").removeClass('composeMessage');
+				$("#composeMessage").remove();
+
+				$("#cloneBody").removeClass('forwardMessage');
+				$("#forward").remove();
+
+				$("#cloneBody").removeClass('deleteMessage');
+				$("#delete").remove();
+				$('html, body').animate({
+					scrollTop : $('#reply').offset().top
+				}, 'slow');
+			} else {
+				$("#cloneBody").addClass('replyMessage');
+				$("#cloneBody").append(replyClone);
+				$("#reply").toggle();
+
+				$("#cloneBody").removeClass('composeMessage');
+				$("#composeMessage").remove();
+
+				$("#cloneBody").removeClass('forwardMessage');
+				$("#forward").remove();
+
+				$("#cloneBody").removeClass('deleteMessage');
+				$("#delete").remove();
+				$('html, body').animate({
+					scrollTop : $('#reply').offset().top
+				}, 'slow');
+			}
+		}
+
+		function forward() {
+			console.log("forward");
+			if ($("#cloneBody").hasClass('forwardMessage')) {
+				$("#forward").toggle();
+
+				$("#cloneBody").removeClass('composeMessage');
+				$("#composeMessage").remove();
+
+				$("#cloneBody").removeClass('replyMessage');
+				$("#reply").remove();
+
+				$("#cloneBody").removeClass('deleteMessage');
+				$("#delete").remove();
+				$('html, body').animate({
+					scrollTop : $('#forward').offset().top
+				}, 'slow');
+			} else {
+				$("#cloneBody").addClass('forwardMessage');
+				$("#cloneBody").append(forwardClone);
+				$("#forward").toggle();
+
+				$("#cloneBody").removeClass('composeMessage');
+				$("#composeMessage").remove();
+
+				$("#cloneBody").removeClass('replyMessage');
+				$("#reply").remove();
+
+				$("#cloneBody").removeClass('deleteMessage');
+				$("#delete").remove();
+				$('html, body').animate({
+					scrollTop : $('#forward').offset().top
+				}, 'slow');
+			}
+		}
+
+		function deleteThisMessage() {
+			console.log("delete");
+			if ($("#cloneBody").hasClass('deleteMessage')) {
+				$("#delete").toggle();
+
+				$("#cloneBody").removeClass('composeMessage');
+				$("#composeMessage").remove();
+
+				$("#cloneBody").removeClass('replyMessage');
+				$("#reply").remove();
+
+				$("#cloneBody").removeClass('forwardMessage');
+				$("#forward").remove();
+				$('html, body').animate({
+					scrollTop : $('#delete').offset().top
+				}, 'slow');
+			} else {
+				$("#cloneBody").addClass('deleteMessage');
+				$("#cloneBody").append(deleteClone);
+				$("#delete").toggle();
+
+				$("#cloneBody").removeClass('composeMessage');
+				$("#composeMessage").remove();
+
+				$("#cloneBody").removeClass('replyMessage');
+				$("#reply").remove();
+
+				$("#cloneBody").removeClass('forwardMessage');
+				$("#forward").remove();
+				$('html, body').animate({
+					scrollTop : $('#delete').offset().top
+				}, 'slow');
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function sendMessage() {
+
+			var recipientsIds = []
+			$('.newRecipient').each(function(i, obj) {
+				console.log($(this).val());
+				recipientsIds.push($(this).val());
+			});
+
+			var recipientsGroupIds = []
+			$('.newGroup').each(function(i, obj) {
+				console.log($(this).val());
+				recipientsGroupIds.push($(this).val());
+			});
+
+			var messageSubject = $('#subject').val();
+			var messageContent = $('#message').val();
+			var parentMessage = $('#parentMessage').val();
+
+			if (messageSubject == null || messageSubject == "") {
+				messageSubject = "error";
+			}
+
+			if (messageContent == null || messageContent == "") {
+				messageContent = "error";
+			}
+
+			if (parentMessage == null || parentMessage == "") {
+				parentMessage = -1;
+			}
+
+			if (recipientsIds.length <= 0) {
+				// the array is empty
+				recipientsIds.push(-1);
+			}
+			if (recipientsGroupIds.length <= 0) {
+				// the array is empty
+				recipientsGroupIds.push(-1);
+			}
+
+			console.log("flag: " + $('#flag').val());
+			console.log("recipientsIdList: " + recipientsIds);
+			console.log("recipientGroupList: " + recipientsGroupIds);
+			console.log("subject: " + messageSubject);
+			console.log("message: " + messageContent);
+			console.log("parentMessageId: " + parentMessage);
+
+			$("#messageStatus").empty();
+			$("#messageStatus")
+					.append(
+							'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Sending message...</a></strong></h2></div></div>');
+
+			$
+					.getJSON(
+							"../../public/sendMessage",
+							{
+								flag : $('#flag').val(),
+								recipientsIdList : recipientsIds,
+								recipientGroupList : recipientsGroupIds,
+								subject : messageSubject,
+								message : messageContent,
+								parentMessageId : parentMessage
+							},
+							function(data) {
+								$("#messageStatus").empty();
+								if (data == "success") {
+									$("#messageStatus").empty();
+									$("#messageStatus")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Message sent!</a></strong></h2></div></div>');
+									$("#subject").val("");
+									$("#message").val("");
+									$("#to_recipients").val("");
+									$("#subject").attr("text", "");
+									$("#message").attr("text", "");
+									$("#to_recipients").attr("text", "");
+
+								} else if (data == "error") {
+									$("#messageStatus").empty();
+									$("#messageStatus")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Error! please input valid values</a></strong></h2></div></div>');
+								} else {
+									$("#messageStatus").empty();
+									$("#messageStatus")
+											.append(
+													'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Error! please input valid values</a></strong></h2></div></div>');
+								}
+							})
+					.fail(
+							function(jqxhr, textStatus, error) {
+								$("#messageStatus").empty();
+								$("#messageStatus")
+										.append(
+												'<div class="block"><div class="block_content"><h2 class="title" style="text-align: center;"><strong><a>Something went wrong! please try again later</a></strong></h2></div></div>');
+							});
+		}
+	</script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							$('input[type="checkbox"]')
+									.change(
+											function() {
+												if (this.checked) {
+													// the checkbox is now checked 
+													$('#to_recipients')
+															.val(
+																	$(
+																			'#to_recipients')
+																			.val()
+																			+ $(
+																					this)
+																					.attr(
+																							'name')
+																			+ '; ');
+
+													//alert($(this).attr('name') + $(this).val());	
+													if ($(this).hasClass(
+															'listOfUsers')) {
+														$("#hiddenInputs")
+																.append(
+																		'<input type="text" hidden="hidden" class="newRecipient" id="'
+																				+ $(
+																						this)
+																						.attr(
+																								'id')
+																				+ '" name="'
+																				+ $(
+																						this)
+																						.attr(
+																								'id')
+																				+ '" value="'
+																				+ $(
+																						this)
+																						.attr(
+																								'value')
+																				+ '">');
+													} else if ($(this)
+															.hasClass(
+																	'listOfGroups')) {
+														$("#hiddenInputs")
+																.append(
+																		'<input type="text" hidden="hidden" class="newGroup" id="'
+																				+ $(
+																						this)
+																						.attr(
+																								'id')
+																				+ '" name="'
+																				+ $(
+																						this)
+																						.attr(
+																								'id')
+																				+ '" value="'
+																				+ $(
+																						this)
+																						.attr(
+																								'value')
+																				+ '">');
+													}
+												} else {
+													// the checkbox is now no longer checked
+													$('#to_recipients')
+															.val(
+																	$(
+																			'#to_recipients')
+																			.val()
+																			.replace(
+																					($(
+																							this)
+																							.attr(
+																									'name') + '; '),
+																					''));
+													$('#hiddenInputs')
+															.find(
+																	'#'
+																			+ $(
+																					this)
+																					.attr(
+																							'id'))
+															.remove();
+												}
+											});
+						});
+	</script>
+</body>
+</html>

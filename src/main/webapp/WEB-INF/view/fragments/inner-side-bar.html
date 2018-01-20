@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body class="nav-md">
+	<div class="container body">
+		<div th:fragment="side-bar" class="main_container">
+			<div class="col-md-3 left_col menu_fixed">
+				<div class="left_col scroll-view">
+					<div class="navbar nav_title" style="border: 0;">
+						<br> <a th:href="@{../index}" class="site_title"><img
+							style="vertical-align: middle; margin-left: 5%;"
+							th:src="@{../viewResources/images/logo.png}" alt="Flower"
+							class="img-responsive"></a>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<!-- menu profile quick info -->
+					<div class="profile clearfix" sec:authorize="isAuthenticated()">
+						<div class="profile_pic">
+							<a th:href="@{../member/my-profile}"><img
+								th:src="(${currentUser.profile.photo} == null ? @{../viewResources/images/anonnymous1.png} : @{../getPicture/{photoId}(photoId=${currentUser.profile.photo.id})})"
+								alt="..." class="img-circle profile_img"
+								style="height: 55px; width: 55px;"></a>
+						</div>
+						<div class="profile_info">
+							<a th:href="@{../member/my-profile}"><span>Welcome,</span>
+								<h2 th:text="${currentUser.profile.firstName}">John</h2></a>
+						</div>
+					</div>
+					<!-- /menu profile quick info -->
+
+					<br />
+
+					<!-- sidebar menu -->
+					<div id="sidebar-menu"
+						class="main_menu_side hidden-print main_menu">
+						<div class="menu_section">
+							<h3>General</h3>
+							<ul class="nav side-menu">
+								<li><a id="menu_toggle"><i class="fa fa-arrow-left"></i><i
+										class="fa fa-arrow-right"></i><span></span> </a></li>
+								<li><a th:href="@{../public/home}"><i
+										class="fa fa-home"></i> Home</a></li>
+								<li><a th:href="@{../public/about-us}"><i
+										class="fa fa-info"></i> About Us</a></li>
+								<li><a th:href="@{../public/events-list}"><i
+										class="fa fa-calendar"></i> Events</a></li>
+								<li><a th:href="@{../public/news-list}"><i
+										class="fa fa-newspaper-o"></i> News</a></li>
+								<li><a><i class="fa fa-sitemap"></i> Committees<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a th:href="@{../public/committee/2}">Advocacy</a></li>
+										<li><a th:href="@{../public/committee/3}">Events</a></li>
+										<li><a th:href="@{../public/committee/4}">Membership</a></li>
+										<li><a th:href="@{../public/committee/5}">Administration</a></li>
+										<li><a th:href="@{../public/committee/6}">Website</a></li>
+										<li><a th:href="@{../public/committee/7}">Archives</a></li>
+										<li><a th:href="@{../public/committee/8}">Baatsoona
+												Land</a></li>
+									</ul></li>
+								<li><a th:href="@{../public/joinus}"><i
+										class="fa fa-plus"></i> Join Us</a></li>
+								<li><a th:href="@{../public/contact-us}"><i
+										class="fa fa-volume-control-phone"></i> Contact Us</a></li>
+							</ul>
+						</div>
+						<div class="menu_section">
+							<h3>Members Area</h3>
+							<ul class="nav side-menu">
+								<li><a><i class="fa fa-gavel"></i>Legal Documents<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a th:href="@{../document/ISAG-Constitution}">ISAG
+												Constitution</a></li>
+										<li><a th:href="@{../document/ISAG-Registration}">ISAG
+												Registration</a></li>
+										<li><a th:href="@{../document/Citizenship-Act}">
+												Citizenship Act</a></li>
+										<li><a th:href="@{../document/Immigration-Act}">
+												Immigration Act</a></li>
+										<li><a th:href="@{../document/Immigration-Requirements}">
+												Immigration Requirements</a></li>
+										<li><a
+											th:href="@{../document/Property-Rights-Of-Spouses}">
+												Property Rights of Spouses</a></li>
+										<li><a th:href="@{../document/Intestate-Succession-Bill}">
+												Intestate Succession Bill</a></li>
+										<li><a th:href="@{../document/Domestic-Violence-Act}">
+												Domestic Violence Act</a></li>
+									</ul></li>
+								<li><a><i class="fa fa-paperclip"></i>Committee
+										Documents<span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a>Advocacy<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li><a th:href="@{../document/minutes/2}">Minutes</a></li>
+												<li><a th:href="@{../document/reports/2}">Reports</a></li>
+											</ul></li>
+										<li><a>Events<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li><a th:href="@{../document/minutes/3}">Minutes</a></li>
+												<li><a th:href="@{../document/reports/3}">Reports</a></li>
+											</ul></li>
+										<li><a>Membership<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li><a th:href="@{../document/minutes/4}">Minutes</a></li>
+												<li><a th:href="@{../document/reports/4}">Reports</a></li>
+											</ul></li>
+										<li><a>Administration<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li><a th:href="@{../document/minutes/5}">Minutes</a></li>
+												<li><a th:href="@{../document/reports/5}">Reports</a></li>
+											</ul></li>
+										<li><a>Website<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li><a th:href="@{../document/minutes/6}">Minutes</a></li>
+												<li><a th:href="@{../document/reports/6}">Reports</a></li>
+											</ul></li>
+										<li><a>Archives<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li><a th:href="@{../document/minutes/7}">Minutes</a></li>
+												<li><a th:href="@{../document/reports/7}">Reports</a></li>
+											</ul></li>
+										<li><a>Baatsoona Land<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li><a th:href="@{../document/minutes/8}">Minutes</a></li>
+												<li><a th:href="@{../document/reports/8}">Reports</a></li>
+											</ul></li>
+									</ul></li>
+								<li><a th:href="@{../member/frequently-asked-questions}"><i
+										class="fa fa-question"></i> Ask ISAG</a></li>
+								<li><a th:href="@{../market/isag-market}"><i
+										class="fa fa-shopping-cart"></i>ISAG Marketplace</a></li>
+								<li><a th:href="@{../member/member-owned-businesses}"><i
+										class="fa fa-briefcase"></i> Members&#8217 Businesses</a></li>
+							</ul>
+						</div>
+						<div class="menu_section"
+							sec:authorize="hasRole('ROLE_COMMITTEE_LEADER')">
+							<h3>Admin Area</h3>
+							<ul class="nav side-menu">
+								<li sec:authorize="hasRole('ROLE_EXECUTIVE_COUNCIL')"><a><i
+										class="fa fa-sitemap"></i> Membership<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li class="sub_menu"><a
+											th:href="@{../admin/approve-new-members}">Approve New
+												Members</a></li>
+										<li><a th:href="@{../admin/assign-membership-roles}">Assign
+												Membership Roles</a></li>
+										<li><a th:href="@{../admin/assign-committee-to-member}">Assign
+												Committees To Members</a></li>
+										<li><a th:href="@{../admin/approve-committee-requests}">Approve
+												Join Committee Requests</a></li>
+										<li><a
+											th:href="@{../admin/approve-committee-leave-requests}">Approve
+												Leave Committee Requests</a></li>
+										<li><a th:href="@{../admin/terminate-membership-roles}">Terminate
+												Membership Roles</a></li>
+										<li><a
+											th:href="@{../admin/terminate-committee-membership}">Terminate
+												Committee Membership</a></li>
+									</ul></li>
+								<li><a><i class="fa fa-sitemap"></i> Committees<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li sec:authorize="hasRole('ROLE_EXECUTIVE_COUNCIL')"><a
+											th:href="@{../admin/add-edit-position}">Update Positions</a></li>
+										<li><a th:href="@{../admin/add-edit-committee}">Update
+												Committees</a></li>
+										<li><a th:href="@{../admin/add-event}">Update Events</a></li>
+									</ul></li>
+							</ul>
+						</div>
+						<br> <br> <br> <br>
+					</div>
+					<!-- /sidebar menu -->
+
+					<!-- /menu footer buttons -->
+					<div class="sidebar-footer hidden-small">
+						<a data-toggle="tooltip" data-placement="top" title="Login"
+							th:href="@{../login}"> <span
+							class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="Inbox"
+							th:href="@{../member/inbox}"> <span
+							class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="Profile"
+							th:href="@{../member/my-profile}"> <span
+							class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="Logout"
+							th:href="@{../logout}"> <span class="glyphicon glyphicon-off"
+							aria-hidden="true"></span>
+						</a>
+					</div>
+					<!-- /menu footer buttons -->
+				</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div class="nav_menu">
+					<nav>
+						<ul class="nav navbar-nav navbar-right"
+							sec:authorize="isAnonymous()">
+							<li class=""><a href="javascript:;"
+								class="user-profile dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"> <img
+									th:src="@{../viewResources/images/anonnymous1.png}" alt="">Guest
+									User <span class=" fa fa-angle-down"></span>
+							</a>
+								<ul class="dropdown-menu dropdown-usermenu pull-right">
+									<li><a th:href="@{../login}"><i
+											class="fa fa-sign-in fa-fw"></i> Member Login</a></li>
+								</ul></li>
+						</ul>
+
+						<ul sec:authorize="isAuthenticated()"
+							class="nav navbar-nav navbar-right">
+							<li class=""><a href="javascript:;"
+								class="user-profile dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"><img
+									th:src="(${currentUser.profile.photo} == null ? @{../viewResources/images/anonnymous1.png} : @{../getPicture/{photoId}(photoId=${currentUser.profile.photo.id})})"
+									alt=""><span
+									th:text="${currentUser.profile.firstName} + ' ' + ${currentUser.profile.lastName} + ' '">
+										John</span><span class=" fa fa-angle-down"></span> </a>
+								<ul class="dropdown-menu dropdown-usermenu pull-right">
+									<li><a th:href="@{../member/my-profile}">Profile</a></li>
+									<li><a th:href="@{../member/inbox}">Inbox</a></li>
+									<li><a th:href="@{../member/outbox}">Outbox</a></li>
+									<li><a th:href="@{../logout}"><i
+											class="fa fa-sign-out pull-right"></i>Logout</a></li>
+								</ul></li>
+
+							<li role="presentation" class="dropdown"><a
+								th:if="${currentUsersMessageRecipients}" href="javascript:;"
+								class="dropdown-toggle info-number" data-toggle="dropdown"
+								aria-expanded="false"> <i class="fa fa-envelope-o"></i> <span
+									th:if="${currentUsersMessageRecipients.size() > 0 }"
+									class="badge bg-red"
+									th:text="${currentUsersMessageRecipients.size()}"></span>
+							</a>
+								<ul id="menu1" class="dropdown-menu list-unstyled msg_list"
+									role="menu">
+									<li style="background-color: rgb(230, 230, 230);"
+										th:each="messageRecipient, iterStat: ${currentUsersMessageRecipients}"
+										th:if="${iterStat.index} < 5"><a
+										th:href="@{../member/inbox-message/{messageRecipientId}(messageRecipientId=${messageRecipient.id})}">
+											<span> <span class="image" style="width: 15%;"><img
+													th:src="((${messageRecipient.message.sender} == null or ${messageRecipient.message.sender.profile.photo} == null) ? @{../viewResources/images/anonnymous1.png} : @{../getPicture/{photoId}(photoId=${messageRecipient.message.sender.profile.photo.id})})"
+													alt="Profile Image" /></span><span
+												style="float: right; width: 85%;"> <span
+													th:text="(${messageRecipient.message.sender} == null ? ${messageRecipient.message.sendersName} + ' ' : ${messageRecipient.message.sender.profile.firstName} + ' ')">Sent
+														by John Smith</span><br> <span class="time"><time
+															class="timeago"
+															th:datetime="${messageRecipient.message.date}">Time
+															of message here</time></span><br> <strong class="message"
+													th:text="${messageRecipient.message.subject}">
+														Message subject here</strong></span></span>
+									</a></li>
+									<li><a th:href="@{../member/inbox}">
+											<div class="text-center">
+												<strong
+													th:text="'View All Messages' +  (${currentUsersMessageRecipients.size()} > 5 ? ' | ' + ${currentUsersMessageRecipients.size() - 5} + ' More' : '' )"></strong>
+												<i class="fa fa-angle-right"></i>
+
+											</div>
+									</a></li>
+								</ul></li>
+
+							<li sec:authorize="hasRole('ROLE_COMMITTEE_LEADER')"
+								role="presentation" class="dropdown"><a href="javascript:;"
+								class="dropdown-toggle info-number" data-toggle="dropdown"
+								aria-expanded="false"> <i class="fa fa-globe"></i> <span
+									th:if="${totalNumberOfNotifications > 0}" class="badge bg-red"
+									th:text="${totalNumberOfNotifications}"></span>
+							</a>
+								<ul class="dropdown-menu list-unstyled msg_list" role="menu">
+									<li th:if="${numberOfNewMembers > 0}"><a
+										th:href="@{../admin/approve-new-members}"> <strong><span
+												class="message text-center"
+												th:text="${numberOfNewMembers} + ' New Membership Request(s)'"></span></strong>
+									</a></li>
+									<li th:if="${numberOfJoinCommitteeRequests > 0}"><a
+										th:href="@{../admin/approve-committee-requests}"> <strong><span
+												class="message text-center"
+												th:text="${numberOfJoinCommitteeRequests} + ' Committee Membership Request(s)'"></span></strong>
+									</a></li>
+									<li th:if="${numberOfLeaveCommitteeRequests > 0}"><a
+										th:href="@{../admin/approve-committee-leave-requests}"> <strong><span
+												class="message text-center"
+												th:text="${numberOfLeaveCommitteeRequests} + ' Request(s) To Leave Committees'"></span></strong>
+									</a></li>
+								</ul></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- /top navigation -->
+		</div>
+	</div>
+</body>
+</html>

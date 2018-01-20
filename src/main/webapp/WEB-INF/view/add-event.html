@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="author" content="ISAG-Ghana">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage"
+	content="../viewResources/images/logo.png">
+<meta name="theme-color" content="#ffffff">
+
+<title>ISAG-Add Event</title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Bootstrap -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/bootstrap/dist/css/bootstrap-datetimepicker.min.css}"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+
+<!-- NProgress -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+
+<!-- jQuery custom content scroller -->
+<link
+	th:href="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom Theme Style -->
+<link th:href="@{../viewResources/bootstrap3/build/css/custom.min.css}"
+	rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-57x57.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-60x60.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-76x76.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-114x114.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-120x120.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-144x144.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-152x152.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{../viewResources/images/HomePage/Favicons/apple-icon-180x180.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{../viewResources/images/HomePage/Favicons/android-icon-192x192.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-32x32.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-96x96.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{../viewResources/images/HomePage/Favicons/favicon-16x16.png}">
+<link rel="manifest"
+	th:href="@{../viewResources/images/HomePage/Favicons/manifest.json}">
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<!-- Side Bar -->
+			<div th:include="fragments/inner-side-bar :: side-bar"></div>
+			<!-- End of Side Bar -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div id="wrapper">
+					<div id="page-wrapper">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-lg-8">
+								<div class="panel panel-default">
+									<div id="cloneBody" class="addEvent editEvent updateEvent">
+										<div id="addEvent"
+											th:attr="style = 'display: ' + (${addEvent} ? ' ' : 'none')">
+											<div class="alert alert-warning" role="alert"
+												style="margin: 0%;">
+												<h2>
+													<strong>Add New Event</strong>
+												</h2>
+											</div>
+											<div class="panel-body">
+												<div class="x_content">
+													<br />
+													<form class="form-horizontal form-label-left input_mask"
+														th:action="@{add-event}" th:object="${addEventFormDTO}"
+														method="POST" enctype="multipart/form-data">
+														<div th:if="${#fields.hasErrors('*')}"
+															class="alert alert-danger alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:each="err : ${#fields.errors('*')}"
+																th:text="${err}"></p>
+														</div>
+														<div th:if="${success}"
+															class="alert alert-success alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:text="${success}"
+																style="text-align: center; font-size: medium;"></p>
+														</div>
+														<div th:if="${error}"
+															class="alert alert-danger alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:text="${error}"
+																style="text-align: center; font-size: medium;"></p>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2" placeholder="Event Name" name="name"
+																th:field="*{name}" required="required"> <span
+																class="fa fa-bullhorn form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('theme')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2" placeholder="Event Theme"
+																name="theme" th:field="*{theme}"> <span
+																class="fa fa-themeisle form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('venue')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2" placeholder="Venue" name="venue"
+																th:field="*{venue}" required="required"> <span
+																class="fa fa-map-marker form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('map') || #fields.hasErrors('validMap')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2"
+																placeholder="Embed Google Maps Here..." name="map"
+																th:field="*{map}"> <span
+																class="fa fa-location-arrow form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('startTime')}? 'has-error'">
+															<input type="text" placeholder="Start Date and Time"
+																class="form-control has-feedback-left datetimepicker"
+																id="datetimepicker8" name="startTime"
+																th:field="*{startTime}"> <span
+																class="fa fa-calendar form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('endTime')}? 'has-error'">
+															<input type="text" placeholder="End Date and Time"
+																class="form-control has-feedback-left datetimepicker"
+																id="datetimepicker8" name="endTime"
+																th:field="*{endTime}"> <span
+																class="fa fa-calendar form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('validEventType')}? 'has-error'">
+															<select type="text"
+																class="form-control has-feedback-left"
+																id="inputSuccess2" name="eventType"
+																th:field="*{eventType}">
+																<option value="0">Event Type...</option>
+																<option value="1">ISAG Event</option>
+																<option value="2">Members' Event</option>
+															</select> <span class="fa fa-filter form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div class="col-md-12 form-group"
+															th:classappend="${#fields.hasErrors('description')}? 'has-error'">
+															<textarea rows="7" type="text" class="form-control"
+																id="inputSuccess2" placeholder="Event Description Here "
+																name="description" th:field="*{description}">
+													</textarea>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<label>Cover Picture</label> <input type="file"
+																class="form-control" id="coverPicture"
+																name="coverPicture"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<label>Promotional Video</label> <input type="file"
+																class="form-control" id="promotionalVideo"
+																name="promotionalVideo"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div class="form-group">
+															<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"
+																style="margin-left: 35%;">
+																<button type="reset" class="btn btn-primary">Cancel</button>
+																<button type="submit" class="btn btn-success">Submit</button>
+																<br /> <br />
+																<button type="button" class="btn btn-warning"
+																	onclick="editEvent();">Edit Existing Event</button>
+																<br />
+																<button type="button" class="btn btn-warning"
+																	onclick="updateEvent();">Update Past Event</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<div id="editEvent"
+											th:attr="style = 'display: ' + (${editEvent} ? ' ' : 'none')">
+											<div class="alert alert-warning" role="alert"
+												style="margin: 0%;">
+												<h2>
+													<strong>Edit Existing Event</strong>
+												</h2>
+											</div>
+											<div class="panel-body">
+												<div class="x_content">
+													<br />
+													<form class="form-horizontal form-label-left input_mask"
+														th:action="@{edit-event}" th:object="${addEventFormDTO}"
+														method="POST" enctype="multipart/form-data">
+														<div th:if="${#fields.hasErrors('*')}"
+															class="alert alert-danger alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:each="err : ${#fields.errors('*')}"
+																th:text="${err}"></p>
+														</div>
+														<div th:if="${success}"
+															class="alert alert-success alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:text="${success}"
+																style="text-align: center; font-size: medium;"></p>
+														</div>
+														<div th:if="${error}"
+															class="alert alert-danger alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:text="${error}"
+																style="text-align: center; font-size: medium;"></p>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<select class="form-control has-feedback-left"
+																id="eventId" name="eventId">
+																<option value="-1">Select The Event To Edit</option>
+																<option th:each="event : ${upCommingEvents}"
+																	th:value="${event.id}" th:text="${event.name}"></option>
+															</select> <span class="fa fa-users form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2" placeholder="Event Name" name="name"
+																th:field="*{name}" required="required"> <span
+																class="fa fa-bullhorn form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('theme')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2" placeholder="Event Theme"
+																name="theme" th:field="*{theme}"> <span
+																class="fa fa-themeisle form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('venue')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2" placeholder="Venue" name="venue"
+																th:field="*{venue}" required="required"> <span
+																class="fa fa-map-marker form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('map')}? 'has-error'">
+															<input type="text" class="form-control has-feedback-left"
+																id="inputSuccess2"
+																placeholder="Embed Google Maps Here..." name="map"
+																th:field="*{map}"> <span
+																class="fa fa-location-arrow form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('startTime')}? 'has-error'">
+															<input type="text" placeholder="Start Date and Time"
+																class="form-control has-feedback-left datetimepicker"
+																id="datetimepicker8" name="startTime"
+																th:field="*{startTime}"> <span
+																class="fa fa-calendar form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('endTime')}? 'has-error'">
+															<input type="text" placeholder="End Date and Time"
+																class="form-control has-feedback-left datetimepicker"
+																id="datetimepicker8" name="endTime"
+																th:field="*{endTime}"> <span
+																class="fa fa-calendar form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+															th:classappend="${#fields.hasErrors('eventType')}? 'has-error'">
+															<select type="text"
+																class="form-control has-feedback-left"
+																id="inputSuccess2" name="eventType"
+																th:field="*{eventType}">
+																<option value="0">Event Type...</option>
+																<option value="1">ISAG Event</option>
+																<option value="2">Members' Event</option>
+															</select> <span class="fa fa-filter form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div class="col-md-12 form-group"
+															th:classappend="${#fields.hasErrors('description')}? 'has-error'">
+															<textarea rows="7" type="text" class="form-control"
+																id="inputSuccess2" placeholder="Event Description Here "
+																name="description" th:field="*{description}">
+													</textarea>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<label>Cover Picture</label> <input type="file"
+																class="form-control" id="coverPicture"
+																name="coverPicture"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<label>Promotional Video</label> <input type="file"
+																class="form-control" id="promotionalVideo"
+																name="promotionalVideo"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div class="form-group">
+															<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"
+																style="margin-left: 35%;">
+																<button type="reset" class="btn btn-primary">Cancel</button>
+																<button type="submit" class="btn btn-success">Submit</button>
+																<br /> <br />
+																<button type="button" class="btn btn-warning"
+																	onclick="addEvent();">Add New Event</button>
+																<br />
+																<button type="button" class="btn btn-warning"
+																	onclick="updateEvent();">Update Past Event</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<div id="updateEvent"
+											th:attr="style = 'display: ' + (${updateEvent} ? ' ' : 'none')">
+											<div class="alert alert-warning" role="alert"
+												style="margin: 0%;">
+												<h2>
+													<strong>Update Past Event</strong>
+												</h2>
+											</div>
+											<div class="panel-body">
+												<div class="x_content">
+													<br />
+													<form class="form-horizontal form-label-left input_mask"
+														th:action="@{update-event}" method="POST"
+														enctype="multipart/form-data">
+														<div th:if="${success}"
+															class="alert alert-success alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:text="${success}"
+																style="text-align: center; font-size: medium;"></p>
+														</div>
+														<div th:if="${error}"
+															class="alert alert-danger alert-dismissible fade in"
+															id="formsDiv">
+															<button type="button" class="close" data-dismiss="alert"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<p th:text="${error}"
+																style="text-align: center; font-size: medium;"></p>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<select class="form-control has-feedback-left"
+																id="eventId" name="eventId">
+																<option value="-1">Select Event To Update</option>
+																<option th:each="event : ${justEndedEvents}"
+																	th:value="${event.id}" th:text="${event.name}"></option>
+															</select> <span class="fa fa-users form-control-feedback left"
+																aria-hidden="true"></span>
+														</div>
+														<div class="col-md-12 form-group">
+															<textarea class="form-control" rows="7" cols=""
+																id="eventSummary" placeholder="Event Summary Here "
+																name="eventSummary"></textarea>
+														</div>
+														<div class="col-md-12	">
+															<div
+																class="alert alert-success alert-dismissible fade in"
+																role="alert">
+																<button type="button" class="close" data-dismiss="alert"
+																	aria-label="Close"></button>
+																<h2 style="text-align: center;">
+																	<strong>Add Pictures From Event</strong>
+																</h2>
+															</div>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="pictures"
+																name="pictures"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div class="col-md-12	">
+															<div
+																class="alert alert-success alert-dismissible fade in"
+																role="alert">
+																<button type="button" class="close" data-dismiss="alert"
+																	aria-label="Close"></button>
+																<h2 style="text-align: center;">
+																	<strong>Add Videos From Event</strong>
+																</h2>
+															</div>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="videos"
+																name="videos"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div
+															class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+															<input type="file" class="form-control" id="videos"
+																name="videos"> <span
+																class="fa fa-camera form-control-feedback right"
+																aria-hidden="true"></span>
+														</div>
+														<div class="form-group">
+															<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"
+																style="margin-left: 35%;">
+																<button type="reset" class="btn btn-primary">Cancel</button>
+																<button type="submit" class="btn btn-success">Submit</button>
+																<br /> <br />
+																<button type="button" class="btn btn-warning"
+																	onclick="addEvent();">Add New Event</button>
+																<br />
+																<button type="button" class="btn btn-warning"
+																	onclick="editEvent();">Edit Existing Event</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-8 -->
+							<div class="col-lg-4">
+								<!-- /.panel -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<i class="fa fa-certificate fa-fw"></i> Partners
+									</div>
+									<!-- /.panel-heading -->
+									<div class="panel-body">
+										<a href="#" class="list-group-item"> <img
+											th:src="@{../viewResources/images/Adverts/jolina.jpg}"
+											alt="Flower" class="img-responsive" style="margin: 0 auto;">
+										</a> <a href="#" class="list-group-item"> <img
+											th:src="@{../viewResources/images/advertise-here-300x300.jpg}"
+											alt="Flower" class="img-responsive">
+										</a>
+										<div class="x_content">
+											<div class="dashboard-widget-content">
+												<ul class="list-unstyled timeline widget">
+													<li>
+														<div class="block">
+															<div class="block_content">
+																<h2 class="title">
+																	<strong><a>AS FOREIGN SPOUSES</a></strong>
+																</h2>
+																<a class="excerpt" style="text-align: justify;">We
+																	advocate and promote the full legal rights of our
+																	members to live and work as Ghanaian spouses do. We are
+																	members of Ghanaian families and therefore uphold the
+																	importance of the family in the full development of the
+																	individual and the nation.</a>
+															</div>
+														</div>
+														<div class="block">
+															<div class="block_content">
+																<h2 class="title">
+																	<strong><a>AS PARENTS OF GHANAIAN CHILDREN</a></strong>
+																</h2>
+																<a class="excerpt" style="text-align: justify;">We
+																	assist our members in their special responsibility of
+																	nurturing citizens of dual heritage. We offer the
+																	additional support that a member’s family would
+																	normally provide as we are individuals away from their
+																	native homes.</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-4 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+
+				</div>
+				<!-- /#wrapper -->
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Developed By: <a href='https://www.linkedin.com/in/prempeh-gyan'
+						target="_blank">Prempeh Gyan</a> | &copy; 2017
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/jquery/dist/jquery.min.js}"></script>
+
+	<!-- Moment -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/moment/moment.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap.js}"></script>
+
+	<!-- Bootstrap -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/bootstrap/dist/js/bootstrap-datetimepicker.js}"></script>
+
+	<!-- 	<script
+		src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+ -->
+
+	<!-- FastClick -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/fastclick/lib/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery custom content scroller -->
+	<script
+		th:src="@{../viewResources/bootstrap3/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{../viewResources/bootstrap3/build/js/custom.min.js}"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$('.datetimepicker').datetimepicker({
+				icons : {
+					time : "fa fa-clock-o",
+					date : "fa fa-calendar",
+					up : "fa fa-arrow-up",
+					down : "fa fa-arrow-down"
+				}
+			});
+		});
+	</script>
+
+	<script>
+		var addEventClone = $("#addEvent").clone(true);
+		var editEventClone = $("#editEvent").clone(true);
+		var updateEventClone = $("#updateEvent").clone(true);
+
+		function addEvent() {
+
+			if ($("#cloneBody").hasClass('addEvent')) {
+
+				$("#cloneBody").removeClass('editEvent');
+				$("#editEvent").remove();
+
+				$("#cloneBody").removeClass('updateEvent');
+				$("#updateEvent").remove();
+
+				$("#addEvent").toggle();
+				$('html, body').animate({
+					scrollTop : $('#addEvent').offset().top
+				}, 'slow');
+
+			} else {
+
+				$("#cloneBody").removeClass('editEvent');
+				$("#editEvent").remove();
+
+				$("#cloneBody").removeClass('updateEvent');
+				$("#updateEvent").remove();
+
+				$("#cloneBody").addClass('addEvent');
+				$("#cloneBody").append(addEventClone);
+				$("#addEvent").toggle();
+				$('html, body').animate({
+					scrollTop : $('#addEvent').offset().top
+				}, 'slow');
+
+			}
+
+		}
+		function editEvent() {
+
+			if ($("#cloneBody").hasClass('editEvent')) {
+
+				$("#cloneBody").removeClass('addEvent');
+				$("#addEvent").remove();
+
+				$("#cloneBody").removeClass('updateEvent');
+				$("#updateEvent").remove();
+
+				$("#editEvent").toggle();
+				$('html, body').animate({
+					scrollTop : $('#editEvent').offset().top
+				}, 'slow');
+
+			} else {
+
+				$("#cloneBody").removeClass('addEvent');
+				$("#addEvent").remove();
+
+				$("#cloneBody").removeClass('updateEvent');
+				$("#updateEvent").remove();
+
+				$("#cloneBody").addClass('editEvent');
+				$("#cloneBody").append(editEventClone);
+				$("#editEvent").toggle();
+				$('html, body').animate({
+					scrollTop : $('#editEvent').offset().top
+				}, 'slow');
+
+			}
+
+		}
+
+		function updateEvent() {
+
+			if ($("#cloneBody").hasClass('updateEvent')) {
+
+				$("#cloneBody").removeClass('addEvent');
+				$("#addEvent").remove();
+
+				$("#cloneBody").removeClass('editEvent');
+				$("#editEvent").remove();
+
+				$("#updateEvent").toggle();
+				$('html, body').animate({
+					scrollTop : $('#updateEvent').offset().top
+				}, 'slow');
+
+			} else {
+
+				$("#cloneBody").removeClass('addEvent');
+				$("#addEvent").remove();
+
+				$("#cloneBody").removeClass('editEvent');
+				$("#editEvent").remove();
+
+				$("#cloneBody").addClass('updateEvent');
+				$("#cloneBody").append(updateEventClone);
+				$("#updateEvent").toggle();
+				$('html, body').animate({
+					scrollTop : $('#updateEvent').offset().top
+				}, 'slow');
+
+			}
+		}
+
+		$(document).ready(function() {
+			// Handler for .ready() called.
+			$('html, body').animate({
+				scrollTop : $('#formsDiv').offset().top
+			}, 'slow');
+		});
+	</script>
+
+
+</body>
+</html>
+
+
+
+
